@@ -1,0 +1,124 @@
+[
+    {
+      "tableNumber": 1,
+      "chairsleft": [
+        { "chairNumber": "C1", "isBooked": false },
+        { "chairNumber": "C2", "isBooked": false },
+        { "chairNumber": "C3", "isBooked": false },
+        { "chairNumber": "C4", "isBooked": false }
+      ],
+      "chairsright": [
+        { "chairNumber": "C5", "isBooked": false },
+        { "chairNumber": "C6", "isBooked": false },
+        { "chairNumber": "C7", "isBooked": false },
+        { "chairNumber": "C8", "isBooked": false }
+      ]
+    },
+    {
+        "tableNumber": 2,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      },
+      {
+        "tableNumber": 3,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      },
+      {
+        "tableNumber": 4,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      },
+      {
+        "tableNumber": 5,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      },
+      {
+        "tableNumber": 6,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      },
+      {
+        "tableNumber": 7,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      },
+      {
+        "tableNumber": 8,
+        "chairsleft": [
+          { "chairNumber": "C1", "isBooked": false },
+          { "chairNumber": "C2", "isBooked": false },
+          { "chairNumber": "C3", "isBooked": false },
+          { "chairNumber": "C4", "isBooked": false }
+        ],
+        "chairsright": [
+          { "chairNumber": "C5", "isBooked": false },
+          { "chairNumber": "C6", "isBooked": false },
+          { "chairNumber": "C7", "isBooked": false },
+          { "chairNumber": "C8", "isBooked": false }
+        ]
+      }
+    
+  ]
+  
