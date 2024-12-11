@@ -18,7 +18,7 @@ const Customersideber = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-stone-800 flex flex-col justify-start  items-center">
+    <div className=" w-full bg-stone-800 flex flex-col justify-start  items-center">
       {/* Profile Card */}
       <div className="flex flex-col justify-center items-center  bg-cyan-700 w-full h-1/3   rounded-xl">
         <div className="flex justify-center items-center">
@@ -56,7 +56,7 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("/book-table")}
+          onClick={() => navigate("booktable")}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
@@ -88,7 +88,7 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("/review-food")}
+          onClick={() => navigate("reviewfood")}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg

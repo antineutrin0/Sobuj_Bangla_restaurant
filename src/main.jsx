@@ -7,13 +7,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './pages/Home.jsx';
-import Table from './pages/Table.jsx';
+import Table from './components/Table.jsx';
 import Signup from './pages/Signup.jsx';
 import AuthProvider, { useAuth } from './appwrite/AuthConfig.jsx';
 import Menu from './pages/Menu.jsx';
 import Signin from './pages/Signin.jsx';
 import CustomerDashboard from './pages/CustomerDashboard.jsx';
 import DashBoard from './pages/DashBoard.jsx';
+import FoodReviewForm from './components/FoodReviewForm.jsx';
+import BookTable from './pages/BookTable.jsx';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,15 @@ const router = createBrowserRouter([
             {
               path:'orderfood',
               element:<Menu></Menu>
+            },
+
+            {
+              path:'booktable',
+              element:<BookTable></BookTable>
+            },
+            {
+              path:'reviewfood',
+              element:<FoodReviewForm></FoodReviewForm>
             }
           ]
         },
