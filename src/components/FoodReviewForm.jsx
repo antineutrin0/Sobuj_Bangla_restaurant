@@ -43,7 +43,7 @@ function FoodReviewForm() {
         })
         
     } catch (error) {
-        
+        console.log(error)
     }
     
   };

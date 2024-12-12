@@ -67,6 +67,25 @@ export class Service {
         }
     }
 
+    async placeOrder({customerName,customerEmail,orderItem,totalPrice}){
+        try {
+            return await this.databases.createDocument(
+                conf.sobujbanglaDatabaseId,
+                conf.sobujbanglaOrderCollectionId,
+                ID.unique(), {
+                   customerName,
+                   customerEmail,
+                   orderItem,
+                   totalPrice,
+                }
+            );
+            
+        } catch (error) {
+            console.log(error)
+        }
+  
+    }
+
   
 
     // async getUserDetails(email) {
