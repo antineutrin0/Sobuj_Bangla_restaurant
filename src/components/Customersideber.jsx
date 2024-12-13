@@ -35,7 +35,7 @@ const Customersideber = () => {
       </div>
 
       <aside className="w-full" aria-label="Sidebar">
-  <div className="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
+  <div className="px-3 py-4 md:h-screen rounded-lg overflow-y-auto  bg-gray-50 dark:bg-gray-800">
     <ul className="space-y-6 ml-4">
       <li>
         <button
@@ -72,7 +72,7 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("/order-history")}
+          onClick={() => navigate("orderhistory")}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg

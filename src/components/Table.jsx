@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import tableData from './tables.json'; // Assuming you store the JSON file in the same directory
-import service from '../appwrite/databaseConfig';
+import React, { useEffect, useState } from "react";
+import tableData from "./tables.json"; // Assuming you store the JSON file in the same directory
+import service from "../appwrite/databaseConfig";
 
-function Table({ formData }) {
+function Table({ formData,showTable }) {
   console.log(formData);
   const [tables, setTables] = useState(tableData);
+  const [isBooked, setIsBooked] = useState(false); // Track overall booking status
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false); // Track alert visibility
 
   const handleChairClick = (tableIndex, chairIndex) => {
     setTables((prevTables) =>
@@ -27,7 +29,7 @@ function Table({ formData }) {
     try {
       console.log("Booking data:", data);
       await service.bookTable(data);
-      console.log("booked successfully!"); // Ensure service.bookTable is implemented to create a document
+      console.log("Booked successfully!");
     } catch (error) {
       console.error("Error booking seat:", error);
     }
@@ -53,8 +55,6 @@ function Table({ formData }) {
               }
             });
           }
-        
-          
         });
         setTables(updatedTables);
         console.log(tables);
@@ -65,24 +65,70 @@ function Table({ formData }) {
     fetchBookedTable();
   }, [formData.date]);
 
-  const handleBookAll = () => {
-    tables.forEach((table) => {
-      const tableNo = table.tableNumber;
-
-      table.chairs.forEach((chair) => {
-        if (chair.isBooked === true) {
-          const data = {
-            tableNo: tableNo,
-            chairNo: chair.chairNumber,
-            bookingDate: formData.date,
-            startTime: formData.startTime,
-            endTime: formData.endTime,
-          };
-          bookseat(data);
+  const handleBookAll = async () => {
+    try {
+      for (const table of tables) {
+        const tableNo = table.tableNumber;
+        for (const chair of table.chairs) {
+          if (chair.isBooked === true) {
+            const data = {
+              tableNo: tableNo,
+              chairNo: chair.chairNumber,
+              bookingDate: formData.date,
+              startTime: formData.startTime,
+              endTime: formData.endTime,
+            };
+            await bookseat(data);
+          }
         }
-      });
-    });
+      }
+      setShowSuccessAlert(true); 
+      console.log("ShowSuccessAlert triggered."); 
+      setTimeout(() => {
+        window.location.reload();
+        setShowSuccessAlert(false);
+
+      }, 3000); 
+    } catch (error) {
+      console.error("Error booking:", error);
+      alert("Failed to book. Please try again.");
+    }
   };
+  
+  if (showSuccessAlert) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-stone-950">
+        <div className="rounded-lg bg-stone-900 px-16 py-14">
+          <div className="flex justify-center">
+            <div className="rounded-full bg-green-400 p-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 p-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-8 w-8 text-white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <h3 className="my-4 text-center text-3xl font-semibold text-gray-100">
+          Booked Successfully!
+          </h3>
+          <p className="w-[230px] text-center font-normal text-gray-100">
+            Your seat has been placed and is being processed.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full lg:w-2/3 flex flex-col mx-auto items-center justify-center p-6 bg-stone-950">
@@ -133,9 +179,12 @@ function Table({ formData }) {
       </div>
       <button
         onClick={handleBookAll}
-        className="mt-6 px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700"
+        className={`mt-6 px-6 py-2 font-bold text-lg rounded-lg ${
+          isBooked ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700 text-white"
+        }`}
+        disabled={isBooked} // Disable if already booked
       >
-        Book
+        {isBooked ? "Booked" : "Book Now"}
       </button>
     </div>
   );

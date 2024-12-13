@@ -67,6 +67,19 @@ export class Service {
         }
     }
 
+    async getOrderHistory(email){
+        try {
+            const response = await this.databases.listDocuments(
+                        conf.sobujbanglaDatabaseId,
+                        conf.sobujbanglaOrderCollectionId,
+                        [Query.equal('customerEmail', email)]
+                      );
+                      return response;
+        } catch (error) {
+             console.log(error)
+        }
+    }
+
     async placeOrder({customerName,customerEmail,orderItem,totalPrice}){
         try {
             return await this.databases.createDocument(

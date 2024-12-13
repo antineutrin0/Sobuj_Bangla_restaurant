@@ -15,6 +15,7 @@ import FoodReviewForm from './components/FoodReviewForm.jsx';
 import BookTable from './pages/BookTable.jsx';
 import SingleItem from './components/SingleItem.jsx';
 import OrderedFood from './components/OrderedFood.jsx';
+import OrderHistory from './components/OrderHistory.jsx';
 
 // Move useState inside a component like App
 function Root() {
@@ -64,6 +65,14 @@ function Root() {
               path: 'customer',
               element: <CustomerDashboard></CustomerDashboard>,
               children: [
+                {
+                 path:'',
+                 element:<Menu orderDetail={orderDetail}></Menu> 
+                },
+                {
+                path:'orderhistory',
+                element:<OrderHistory></OrderHistory>
+                },
                 {
                   path: 'orderfood',
                   element: <Menu orderDetail={orderDetail}></Menu>

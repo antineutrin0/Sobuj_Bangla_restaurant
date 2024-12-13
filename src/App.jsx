@@ -6,6 +6,7 @@ import Menu from "./pages/Menu";
 import Body1 from "./components/Body1";
 import Header from "./components/header";
 import Review from "./components/Review";
+import ItemCarosel from "./components/ItemCarosel";
 
 const App = () => {
   
@@ -13,7 +14,9 @@ const App = () => {
     <>
       <Header></Header>
       <Body1></Body1>
-      <Menu></Menu>
+      <div className=" bg-stone-950 flex mx-auto items-center justify-center">
+      <ItemCarosel></ItemCarosel>
+      </div>
       <Review></Review>
     </>
   )

@@ -12,7 +12,7 @@ const Menu = ({orderDetail}) => {
   return (
    <div>
     <div className="flex justify-end mr-4 mt-4">
-          <button className="bg-emerald-500 p-2 text-xl font-semibold rounded-lg "
+          <button className="bg-emerald-500 p-2 text-xl font-semibold rounded-lg text-black "
           onClick={()=>{
             navigate("orderedlist")
           }}
@@ -33,7 +33,7 @@ const Menu = ({orderDetail}) => {
              <div className="p-4">
                <h2 className="text-2xl font-bold text-white">{food.name}</h2>
                <p className="text-white mt-2">{food.description}</p>
-               <p className="text-lg font-semibold text-white mt-2">{food.price}</p>
+               <p className="text-lg font-semibold text-white mt-2">${food.price}</p>
                <div className="mt-4 flex justify-end">
                  <button
                    onClick={() => handleOrder(food.id)} 
