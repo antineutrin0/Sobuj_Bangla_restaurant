@@ -1,6 +1,10 @@
 import { FaCoffee, FaAward, FaSeedling, FaMugHot } from "react-icons/fa";
+import { useAuth } from "../appwrite/AuthConfig";
+import { useNavigate } from "react-router-dom";
 
 const Body1 = () => {
+  const {user}=useAuth();
+  const navigate=useNavigate();
   const features = [
     {
       icon: <FaCoffee size={48} className="text-white" />,
@@ -28,7 +32,26 @@ const Body1 = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 justify-center gap-6 lg:gap-14 py-8 bg-stone-950 px-4 md:px-6">
+   <div className="flex flex-col md:flex-row justify-between">
+    <div className="bg-stone-950 w-full md:w-1/3 lg:w-1/2">
+    <div className="flex flex-col justify-center items-center   h-full text-center text-white p-6"> 
+        <p className="text-xl md:text-2xl text-start font-bold border border-amber-600 p-2 rounded-lg">Our Exclusivity</p>
+        <h2 className="text-lg md:text-lx italic  text-center">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</h2>
+      <div className=" flex mx-auto md:mx-0 ">
+         <button className=" text-center mt-8   text-lg md:text-xl text-black font-bold bg-amber-700 p-4 px-8 rounded-lg hover:bg-amber-600"
+         onClick={()=>{
+          if(user)
+            navigate('/dashboard/customer')
+          else
+          navigate('/signin')
+         }}
+         >
+        Join us
+         </button>
+        </div>
+      </div>
+    </div>
+    <div className="w-full md:w-2/3 lg:w-1/2 grid  grid-cols-2 justify-center gap-2 md:gap-4 py-8 bg-stone-950 px-4 md:px-6">
       {features.map((feature, index) => (
         <div
           key={index}
@@ -40,6 +63,7 @@ const Body1 = () => {
         </div>
       ))}
     </div>
+   </div>
   );
 };
 

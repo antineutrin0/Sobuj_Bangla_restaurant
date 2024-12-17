@@ -2,27 +2,27 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { Account, Client, ID } from "appwrite";
 import conf from '../conf/conf.js';
 
-// Set up the Appwrite client and account service
+
 const client = new Client();
 client.setEndpoint(conf.sobujbanglaURL).setProject(conf.sobujbanglaProjectId);
 
 const account = new Account(client);
 
-// AuthService with authentication methods
+
 class AuthService {
     async createAccount({ email, password, name, userType }) {
         try {
-            // Create a new user account
+            
             const userAccount = await account.create(ID.unique(), email, password, name);
     
             if (userAccount) {
                 console.log("User ID:", userAccount.$id);
                 console.log("User Type:", userType);
     
-                // Log the user in after account creation
+                
                 await account.createEmailPasswordSession(email, password);
     
-                // Update user preferences with the role
+               
                 await account.updatePrefs({ role: userType });
             } else {
                 return userAccount;
@@ -59,17 +59,17 @@ class AuthService {
     }
 }
 
-// Create AuthContext
+
 const AuthContext = createContext();
 
-// The AuthProvider component that will wrap the app and provide the context
+
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const authService = new AuthService();
 
-    // Fetch the current user on app load
+    
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -121,6 +121,6 @@ const AuthProvider = ({ children }) => {
     );
 };
 
-// Custom hook to access the AuthContext in any component
+
 export const useAuth = () => useContext(AuthContext);
 export default AuthProvider;

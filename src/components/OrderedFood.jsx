@@ -1,33 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import service from '../appwrite/databaseConfig';
 import { useAuth } from '../appwrite/AuthConfig';
 
-function OrderedFood({ orderDetail }) {
+function OrderedFood() {
     const { user } = useAuth();
-    const navigate = useNavigate(); // Initialize navigate
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false); // State to manage success alert
+    const navigate = useNavigate(); 
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false); 
+    const [orderDetail,setOrderDetail]=useState([]);
+    const [totalprice,settotalprice]=useState(0);
+    let total=0;
 
-    let total = 0;
-    orderDetail.map(item => {
-        total += item.price;
-    });
+    useEffect(()=>{
+        const orderdata=async()=>{
+            try {
+                const response=await service.getMyCardData(user.email);
+                setOrderDetail(response);
+                console.log(orderDetail);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        orderdata();
+    },[])
+
+   useEffect(()=>{
+    console.log("total")
+    console.log("order",orderDetail);
+    const sum=()=>{
+        orderDetail.map(item => {
+           total+=Number(item.totalPrice);
+        });
+       settotalprice(total);
+    }
+    
+   sum();
+   },[orderDetail])
 
     async function placeorder() {
         try {
             const orderDetailString = JSON.stringify(orderDetail);
-
+            
             await service.placeOrder({
                 customerName: user.name,
                 customerEmail: user.email,
                 orderItem: orderDetailString,
                 totalPrice: total.toFixed(2),
             });
-
-            setShowSuccessAlert(true); // Show success alert
+           
+            orderDetail.map(order=>{
+             const deleteFromCard=async()=>{
+                try {
+                    await service.deleteFromCard(order.itemId,user.email)
+                    
+                } catch (error) {
+                    console.log(error);
+                }
+             }
+             deleteFromCard();
+            })
+            setShowSuccessAlert(true); 
             setTimeout(() => {
-                navigate('/dashboard/customer/orderfood'); // Navigate to OrderFood after 3 seconds
-            }, 3000);
+                navigate('/dashboard/customer/orderfood'); 
+                window.location.reload();
+            }, 2000);
         } catch (error) {
             console.error("Error placing order:", error);
         }
@@ -69,9 +105,9 @@ function OrderedFood({ orderDetail }) {
     }
 
     return (
-        <div className="bg-stone-950 p-8 rounded-md w-full">
+        <div className="bg-stone-950 p-8 rounded-md w-full lg:w-2/3 mx-auto">
             <div className="flex items-center justify-between pb-6">
-                <h2 className="text-white mx-auto text-2xl bg-green-700 rounded-lg px-6 text-center font-semibold">
+                <h2 className="text-white mx-auto text-2xl border border-amber-700 rounded-lg px-6 text-center font-semibold">
                     Ordered Food
                 </h2>
             </div>
@@ -99,10 +135,10 @@ function OrderedFood({ orderDetail }) {
                                         <p className="text-gray-100 whitespace-no-wrap">{item.itemName}</p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-stone-600 text-lg font-semibold">
-                                        <p className="text-gray-100 whitespace-no-wrap text-center">{item.quantity}</p>
+                                        <p className="text-gray-100 whitespace-no-wrap ml-10">{item.quantity}</p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-stone-600 text-lg font-semibold">
-                                        <p className="text-gray-100 whitespace-no-wrap">{`$${item.price.toFixed(2)}`}</p>
+                                        <p className="text-gray-100 whitespace-no-wrap">{`$${item.totalPrice}`}</p>
                                     </td>
                                 </tr>
                             ))}
@@ -112,16 +148,23 @@ function OrderedFood({ orderDetail }) {
             </div>
             <div>
                 <p className="text-white text-xl text-right mr-2 font-bold">
-                    Total: ${total.toFixed(2)}
+                    Total: ${totalprice.toFixed(2)}
                 </p>
             </div>
             <div className="flex items-center mt-8">
-                <button
-                    className="text-white mx-auto text-2xl bg-lime-700 hover:bg-green-600 rounded-lg px-4 py-1 text-center font-semibold"
-                    onClick={placeorder}
-                >
-                    Confirm Order
-                </button>
+               
+               {
+               orderDetail.length?<button
+                className="text-white mx-auto text-2xl bg-lime-700 hover:bg-green-600 rounded-lg px-4 py-1 text-center font-semibold "
+                onClick={placeorder}
+            >
+                Confirm Order
+            </button>:<p
+                className="text-white mx-auto text-2xl bg-amber-500 rounded-lg px-4 py-1 text-center font-semibold "
+            >
+                Items is Empty
+            </p>
+               }
             </div>
         </div>
     );

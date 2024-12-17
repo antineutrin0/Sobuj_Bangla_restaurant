@@ -7,6 +7,8 @@ import Body1 from "./components/Body1";
 import Header from "./components/header";
 import Review from "./components/Review";
 import ItemCarosel from "./components/ItemCarosel";
+import Chefs from "./components/Chefs";
+import Footer from "./components/Footer";
 
 const App = () => {
   
@@ -17,7 +19,13 @@ const App = () => {
       <div className=" bg-stone-950 flex mx-auto items-center justify-center">
       <ItemCarosel></ItemCarosel>
       </div>
-      <Review></Review>
+      <Chefs></Chefs>
+      <div className="bg-stone-950">
+        <Review></Review>
+      </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </>
   )
 };

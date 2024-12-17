@@ -14,10 +14,10 @@ function BookTable() {
     const dates = [];
     const now = new Date();
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 1; i <= 7; i++) {
       const futureDate = new Date();
       futureDate.setDate(now.getDate() + i);
-      dates.push(futureDate.toISOString().split('T')[0]); // YYYY-MM-DD format
+      dates.push(futureDate.toISOString().split('T')[0]); 
     }
 
     return dates;
@@ -26,7 +26,7 @@ function BookTable() {
   const generateHours = (startHour) => {
     const hours = [];
     for (let i = startHour; i < 24; i++) {
-      hours.push(i.toString().padStart(2, '0')); // Format as 2 digits
+      hours.push(i.toString().padStart(2, '0')); 
     }
     return hours;
   };
@@ -61,13 +61,12 @@ function BookTable() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-stone-950 text-white p-4">
-      <h1 className="text-2xl font-bold mb-6">Book a Table</h1>
+      <h1 className="text-2xl font-bold mb-6">Book Your Seat</h1>
 
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-stone-800 p-6 rounded-lg shadow-md space-y-4"
       >
-        {/* Date Selection */}
         <div>
           <label
             htmlFor="date"
@@ -134,7 +133,6 @@ function BookTable() {
           </select>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-md transition"
@@ -142,7 +140,7 @@ function BookTable() {
           Take Your Seat
         </button>
       </form>
-      {showTable && formData && <Table formData={formData} />}
+      {showTable && formData && <Table formData={formData} showTable={showTable} />}
     </div>
   );
 }

@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "photoUrl": "https://i.ibb.co.com/L1CB1GF/OIP-2.jpg",
+      "designation": "Executive Chef",
+      "email": "john@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Michael Smith",
+      "photoUrl": "https://i.ibb.co.com/D47Y0rc/OIP-1.jpg",
+      "designation": "Sous Chef",
+      "email": "michael@example.com"
+    },
+    {
+      "id": 3,
+      "name": "Sophia Brown",
+      "photoUrl": "https://i.ibb.co.com/KG7yMTh/OIP.jpg",
+      "designation": "Pastry Chef",
+      "email": "sophia@example.com"
+    },
+    {
+        "id": 4,
+        "name": "David Johnson",
+        "photoUrl": "https://i.ibb.co.com/Q8FGV5y/eab0c9a108aede1040d02cbcdec18362.jpg",
+        "designation": "Line Chef",
+        "email": "david@example.com"
+      }
+    ]

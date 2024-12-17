@@ -1,23 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import items from './foodData.json';
+import service from '../appwrite/databaseConfig';
+import { useAuth } from '../appwrite/AuthConfig';
 
-function SingleItem({ addToOrder }) {
+
+function SingleItem() {
+  const {user}=useAuth();
   const { id } = useParams();
   const [singleitem, setsingleitem] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [isAdded, setIsAdded] = useState(false); // Track if the item has been added
-
+  const [isAdded, setIsAdded] = useState(false); 
+  const navigate=useNavigate();
   const handleAddToOrder = () => {
-    const orderItem = {
-      id: singleitem.id,
-      itemName: singleitem.name,
-      quantity,
-      price: quantity * singleitem.price,
-    };
-
-    addToOrder(orderItem);
-    setIsAdded(true); // Set to true after adding the item
+    if(!user){
+      navigate('/signin');
+    }
+    if(!isAdded){
+      const addToCard=async()=>{
+        try {
+          await service.addToCard({
+            email:user.email,
+            itemId:id,
+            quantity:quantity,
+            totalPrice:(quantity * singleitem.price).toString(),
+            itemName:singleitem.name
+        });
+          
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      addToCard();
+    }
+    setIsAdded(true); 
   };
 
   useEffect(() => {
@@ -34,10 +50,12 @@ function SingleItem({ addToOrder }) {
   }
 
   const increaseQuantity = () => {
+    if(!isAdded)
     setQuantity(prev => prev + 1);
   };
 
   const decreaseQuantity = () => {
+    if(!isAdded)
     setQuantity(prev => (prev > 1 ? prev - 1 : 1));
   };
 
@@ -65,17 +83,22 @@ function SingleItem({ addToOrder }) {
         </div>
         <div className="flex flex-col items-center mt-6">
           <div className="flex items-center space-x-4">
+            <p className={` text-xl text-white font-bold rounded ${
+            !isAdded ? "hidden" : ""
+             }`}>Quantity:</p>
             <button
               onClick={decreaseQuantity}
-              className="px-4 py-1 bg-slate-700 text-xl text-white font-bold rounded hover:bg-red-700"
-            >
+              className={`px-4 py-1 bg-slate-700 text-xl text-white font-bold rounded ${
+                isAdded ? "hidden" : "hover:bg-red-700"
+              }`} >
               -
             </button>
             <span className="text-xl font-semibold text-white">{quantity}</span>
             <button
               onClick={increaseQuantity}
-              className="px-4 py-1 text-xl bg-slate-700 text-white font-bold rounded hover:bg-green-700"
-            >
+              className={`px-4 py-1 bg-slate-700 text-xl text-white font-bold rounded ${
+                isAdded ? "hidden" : "hover:bg-green-700"
+              }`}>
               +
             </button>
           </div>

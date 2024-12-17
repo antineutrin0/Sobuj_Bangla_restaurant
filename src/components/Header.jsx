@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../appwrite/AuthConfig";
+import foodData from './foodData.json';
+import { ImSearch } from "react-icons/im";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +12,11 @@ const Header = () => {
   const {user}=useAuth();
 
   const handleSearch = () => {
-    console.log("what happened");
-    console.log(`Search query: ${searchQuery}`);
-    alert(`Search query: ${searchQuery}`);
+    foodData.map(item=>{
+      if(item.name==searchQuery){
+        navigate(`/fooditem/${item.id}`)
+      }
+    })
   };
   const dashboardbtn=()=>{
     if(user.prefs.role=="Admin"){
@@ -36,7 +40,7 @@ const Header = () => {
       }}
     >
       {/* Navbar */}
-      <nav className="flex justify-between items-center p-4 bg-dark bg-opacity-50 fixed top-0 w-full">
+      <nav className="flex justify-between items-center p-4 bg-dark bg-opacity-50  top-0 w-full">
       <div className="flex flex-col md:flex-row items-center justify-between mx-auto w-full max-w-4xl space-y-2 md:space-y-0 md:space-x-6">
   {/* First Div */}
   <div className="text-white text-2xl font-bold rounded-xl p-2  roboto-text flex flex-row w-4/5 justify-between">
@@ -58,28 +62,13 @@ const Header = () => {
         </div>
   </div>
 
-  {/* Second Div */}
-  <div className=" flex items-center bg-lightGray border-white border-2 p-1 rounded-full flex-1 w-4/5">
-    <input
-      type="text"
-      placeholder="Search..."
-      className="bg-transparent outline-none text-white text-sm md:text-lg flex-grow px-2"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-    />
-    <button
-      onClick={handleSearch}
-      className="text-dark text-lg font-bold hover:text-black px-2"
-    >
-      🔍
-    </button>
-  </div>
+ 
 </div>
 
 
         {/* Nav Items */}
         <div
-          className={`absolute md:static top-16 right-0 mr-8 bg-dark bg-opacity-90 w-full md:w-auto md:flex md:items-center space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0 transition-all duration-300 ${
+          className={`absolute md:static top-16 right-0 mr-8 bg-dark bg-opacity-90 md:w-auto md:flex md:items-center space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0  ${
             isMenuOpen ? " items-start left-2/3 flex flex-col" : "hidden"
           }`}
         >
@@ -97,18 +86,21 @@ const Header = () => {
               setIsMenuOpen(false);
               navigate("/menu");
             }}
-            className="text-white text-lg md:text-xl hover:underline"
+            className="text-white text-lg  md:text-xl hover:underline"
           >
             Menu
           </button>
           <button
             onClick={() => {
               setIsMenuOpen(false);
-              navigate("/bookseat");
+              if(user)
+              navigate("/dashboard/customer/booktable");
+            else
+            navigate('/signin');
             }}
             className="text-white text-lg md:text-xl hover:underline"
           >
-            Book Now
+            BookNow
           </button>
           <button
             onClick={() => {
@@ -133,7 +125,7 @@ const Header = () => {
             Sign Up
             </button>
             <button
-            className="text-white text-lg md:text-xl hover:underline"
+            className=" text-white text-lg md:text-xl hover:underline"
             onClick={() => {
                 setIsMenuOpen(false);
                 navigate("/signin");
@@ -143,11 +135,11 @@ const Header = () => {
             </button>
         </div>
         ) : (
-        <div className="text-center text-lg font-semibold bg-cyan-600 p-2 rounded-lg">
+        <div className="text-center text-xl lg:text-2xl text-black font-semibold bg-amber-600 px-4 py-2 rounded-lg hover:bg-amber-700">
             {user.prefs && user.prefs.role === "Customer" ? (
             <button
                 onClick={() => {
-                navigate(  'dashboard/customer');
+                navigate(  'dashboard/customer/orderfood');
                 }}
             >
                 Explore
@@ -161,15 +153,48 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Main Content */}
-      <div className="flex flex-col justify-center items-center h-full text-center text-white p-6">
-        <h1 className="text-4xl md:text-6xl font-bold">California Maki</h1>
-        <h2 className="text-2xl md:text-4xl italic">on Black Plate</h2>
-        <p className="mt-6 max-w-lg text-sm md:text-base">
-          Where expert culinary skills and an innate appreciation of nature
-          come together to inspire and enhance the Japanese dining experience.
-          Fauget Sushi is no ordinary dining restaurant.
-        </p>
+      <div className="flex flex-col justify-center items-center md:items-start  h-full text-center text-white p-6">
+        <div className=" backdrop-blur-lg p-16 rounded-lg">
+        <div className=" flex items-center bg-green-600 border-white border-2 p-1 py-2 mt-4 mb-8 rounded-full mx-auto flex-1 w-4/5">
+        <select
+    className="bg-transparent text-xl text-gray-900 font-semibold px-2 outline-none w-full"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  >
+    <option value="" disabled>
+      Select Your Food
+    </option>
+    {
+      foodData.map(item=>(
+        <option value={item.name} className="text-black ">{item.name}</option>
+      ))
+    }
+    
+  </select>
+  <button
+    onClick={handleSearch}
+    className="text-dark text-2xl bg-red-600 font-bold hover:text-black p-2 rounded-r-full"
+  >
+    <ImSearch />
+  </button>
+  </div>
+        <p className="text-4xl md:text-6xl text-start font-bold">Enjoy Our Meal</p>
+        <h2 className="text-3xl md:text-5xl italic font-bold text-end ">On Black Plate</h2>
+        <p className="text-lg font-thin">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
+        </div>
+      <div className=" -mt-16  z-10 flex mx-auto md:mx-0 ">
+         <button className=" text-center mt-8  md:ml-80 text-2xl md:text-4xl text-black font-bold bg-amber-700 p-8 rounded-2xl hover:bg-amber-600"
+         onClick={()=>{
+          if(user)
+            navigate('/dashboard/customer/booktable')
+          else
+          navigate('/signin')
+         }}
+       
+         >
+          BOOK A TABLE
+         </button>
+        </div>
       </div>
     </div>
   );

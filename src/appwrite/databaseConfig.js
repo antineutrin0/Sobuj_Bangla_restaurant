@@ -53,6 +53,61 @@ export class Service {
             console.log(error)
         }
     }
+    async addToCard({email,itemId,quantity,totalPrice,itemName}){
+
+      try {
+        const response = await this.databases.listDocuments(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaUserCardCollectionId,
+            [Query.equal('email', email),Query.equal('itemId',itemId)]
+          );
+
+          if(response.documents.length==0){
+            try {
+        
+                return await this.databases.createDocument(
+                    conf.sobujbanglaDatabaseId,
+                    conf.sobujbanglaUserCardCollectionId,
+                    ID.unique(),{
+                        email,
+                        itemId,
+                        quantity,
+                        totalPrice,
+                        itemName
+                    }
+                )
+                
+            } catch (error) {
+                console.log(error);
+            }
+         
+          }
+          else
+               {
+                try {
+        
+                    return await this.databases.updateDocument(
+                        conf.sobujbanglaDatabaseId,
+                        conf.sobujbanglaUserCardCollectionId,
+                        response.documents[0].$id,
+                        {
+                            quantity,
+                            totalPrice,
+                        }
+                    )
+                    
+                } catch (error) {
+                    console.log(error);
+                }
+
+          }
+        
+      }
+       catch (error) {
+        console.log(error);
+      }
+        
+    }
     async getbookedtable(bookingDate){
         try {
             const response = await this.databases.listDocuments(
@@ -98,7 +153,64 @@ export class Service {
         }
   
     }
+   
+    async deleteFromCard(itemId,email) {
+            try {
+              const response=await this.databases.listDocuments(
+                    conf.sobujbanglaDatabaseId, 
+                    conf.sobujbanglaUserCardCollectionId,
+                    [Query.equal('itemId',itemId),Query.equal('email',email)] 
+                );
+               const documentid=response.documents[0].$id; 
+               if(documentid){
+                   try {
+                    await this.databases.deleteDocument(
+                        conf.sobujbanglaDatabaseId,
+                        conf.sobujbanglaUserCardCollectionId,
+                        documentid 
+                       )
+                    return true;
+                   } catch (error) {
+                    console.log(error);
+                   }
+               }
+            } catch (error) {
+                console.log(error);
 
+            }
+        }
+
+        async getMyCardData(email) {
+                try {
+                  const response = await this.databases.listDocuments(
+                    conf.sobujbanglaDatabaseId,
+                    conf.sobujbanglaUserCardCollectionId,
+                    [Query.equal('email',email)]
+                  );
+                  console.log('Fetched Document:', response);
+                  
+                 return response.documents; 
+                } catch (error) {
+                  console.error('Error fetching document:', error);
+                  throw error; 
+                }
+            }
+
+            async getAllCollectionData(collectionId) {
+                    try {
+                      
+                      const response = await this.databases.listDocuments(
+                        conf.sobujbanglaDatabaseId,
+                        collectionId
+                      );
+                      console.log('Fetched Document:', response);
+                      
+                     return response.documents;
+                    } catch (error) {
+                      console.error('Error fetching document:', error);
+                      throw error; 
+                    }
+                }
   
 
     // async getUserDetails(email) {

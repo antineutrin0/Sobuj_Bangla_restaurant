@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Client, Account } from "appwrite";
 import { useAuth } from "../appwrite/AuthConfig";
-
+import { LuTriangleAlert } from "react-icons/lu";
+import { BsPciCard } from "react-icons/bs";
 const Customersideber = () => {
   const navigate = useNavigate();
-   const {logout}=useAuth();
-  // Logout function
-  const handleLogout = async () => {
-    try {
+   const {user,logout}=useAuth();
+   const [clicklogout,setclicklogout]=useState(false);
+  const handleLogout =  () => {
+    setclicklogout(!clicklogout);
+     
+  };
 
+  const handleLogoutclicked = async () => {
+    try {
      await logout();
       navigate("/"); // Redirect to login page after logout
     } catch (error) {
@@ -19,18 +24,18 @@ const Customersideber = () => {
 
   return (
     <div className=" w-full bg-stone-800 flex flex-col justify-start  items-center">
-      {/* Profile Card */}
-      <div className="flex flex-col justify-center items-center  bg-cyan-700 w-full h-1/3   rounded-xl">
+      
+      <div className="flex flex-col justify-center items-center  bg-cyan-700 w-full h-1/3 p-4  rounded-xl">
         <div className="flex justify-center items-center">
           <img
-            className="object-cover  h-40 w-40 rounded-full"
-            src="https://images.unsplash.com/photo-1484608856193-968d2be4080e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80"
+            className="object-cover h-40 w-40 rounded-full"
+            src="https://i.ibb.co.com/VLttntY/c04b017b6b9d1c189e15e6559aeb3ca8.png"
             alt="User Profile"
           />
         </div>
           <div className="h-full w-full flex flex-col justify-center items-center">
-            <h1 className="text-white text-xl font-bold mb-2">Maria R.</h1>
-            <p className="text-white text-sm">New York, USA</p>
+            <h1 className="text-white text-xl font-bold mb-2">{user.name}</h1>
+            <p className="text-white text-sm">{user.email}</p>
           </div>
       </div>
 
@@ -52,6 +57,15 @@ const Customersideber = () => {
             <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
           </svg>
           <span className="ml-3">Order Food</span>
+        </button>
+      </li>
+      <li >
+        <button
+          onClick={() => navigate("mycard")}
+          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+        >
+         <BsPciCard className="text-gray-400"/>
+          <span className="ml-3">My Card</span>
         </button>
       </li>
       <li>
@@ -104,7 +118,6 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("/donation")}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
@@ -137,7 +150,28 @@ const Customersideber = () => {
     </ul>
   </div>
 </aside>
-
+            {
+              clicklogout&& <div className="absolute top-1/3 left-4 lg:right-1/2 z-30 flex items-center justify-center rounded-lg m-0 bg-none">
+              <div className="rounded-lg bg-gray-950 px-16 py-14">
+                <div className="flex justify-center">
+                  <div className="rounded-full bg-red-600 p-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500 p-4">
+                    <LuTriangleAlert className="text-3xl font-bold text-white" />
+                    </div>
+                  </div>
+                </div>
+                <h3 className="my-4 text-center text-3xl font-semibold text-gray-100">
+              Are You Sure to Logout?
+                </h3>
+                <div className="flex space-x-32 justify-center rounded-lg">
+                  <button className="text-xl p-2 bg-gray-700 rounded-lg" onClick={()=>{
+                    setclicklogout(!clicklogout);
+                  }}>cencel</button>
+                  <button className="text-xl p-2 bg-red-600 rounded-lg text-black" onClick={handleLogoutclicked}>Logout</button>
+                </div>
+              </div>
+            </div>
+            }
     </div>
   );
 };

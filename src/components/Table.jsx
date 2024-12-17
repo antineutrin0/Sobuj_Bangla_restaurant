@@ -132,7 +132,18 @@ function Table({ formData,showTable }) {
 
   return (
     <div className="w-full lg:w-2/3 flex flex-col mx-auto items-center justify-center p-6 bg-stone-950">
-      <h1 className="text-2xl font-bold text-white mb-4">Restaurant Tables</h1>
+      <h1 className="text-2xl font-bold text-white mb-4">Map of Tables</h1>
+      <div className="flex flex-row space-x-4 my-4">
+        <div className="bg-red-600 text-black py-3 px-1 rounded-lg font-semibold">
+          Booked
+        </div>
+        <div className="bg-yellow-500 text-black py-3 px-1 rounded-lg font-semibold">
+         Added
+        </div>
+        <div className="bg-green-500 text-black py-3 px-1 rounded-lg font-semibold">
+          Empty
+        </div>
+      </div>
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tables.map((table, tableIndex) => (
           <div
@@ -179,7 +190,7 @@ function Table({ formData,showTable }) {
       </div>
       <button
         onClick={handleBookAll}
-        className={`mt-6 px-6 py-2 font-bold text-lg rounded-lg ${
+        className={`my-16 px-6 py-2 md:py-4 font-bold text-xl rounded-lg ${
           isBooked ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700 text-white"
         }`}
         disabled={isBooked} // Disable if already booked

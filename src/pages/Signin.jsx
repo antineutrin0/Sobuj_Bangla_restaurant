@@ -26,7 +26,7 @@ function Signin() {
     try {
       const result = await login(formData);
       console.log('Login successful:', result);
-      navigate('/cusotmer')
+      navigate('/dashboard/customer/orderfood')
     } catch (error) {
       console.error('Login failed:', error.message);
       setError('Invalid email or password.'); 
@@ -37,17 +37,14 @@ function Signin() {
     <div className="min-h-screen flex items-center justify-center bg-stone-950 p-4">
       <div className="bg-stone-800 rounded-lg shadow-lg p-8 w-full max-w-md">
         <div className="mx-auto text-center mb-6">
-          <span className="relative left-5 text-xl bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg">
+          <span className="relative left-5 text-xl bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg text-white">
             SOBUJ
           </span>
-          <span className="bg-green-600 pl-6 pr-2 py-1 text-xl rounded-lg">
+          <span className="bg-green-600 pl-6 pr-2 py-1 text-xl rounded-lg text-white">
             BANGLA
           </span>
         </div>
 
-        <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
-          Sign In
-        </h1>
         {error && (
           <p className="text-red-500 text-sm text-center mb-4">{error}</p>
         )}

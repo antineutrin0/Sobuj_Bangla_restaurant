@@ -8,6 +8,8 @@ const conf={
     sobujbanglaDonationCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_DONATION_COLLECTION_ID),
     sobujbanglaBucketId:String(import.meta.env.VITE_SOBUJ_BANGLA_BUCKET_ID), 
     sobujbanglaTableCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_TABLE_COLLECTION_ID),
-    sobujbanglaReviewCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_REVIEW_COLLECTION_ID)
+    sobujbanglaReviewCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_REVIEW_COLLECTION_ID),
+    sobujbanglaUserCardCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_USER_CARD_COLLECTION_ID)
+    
  }
  export default conf

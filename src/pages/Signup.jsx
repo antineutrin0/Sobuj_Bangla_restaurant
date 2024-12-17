@@ -59,8 +59,11 @@ function Signup() {
     try {
       const result = await createAccount(formData);
       console.log(result);
-      navigate('/userdetail'); // Redirect to user details page
-      window.location.reload(); // Optional: Refresh page after redirect
+      if(formData.userType=='Customer')
+      navigate('/dashboard/customer/orderfood');
+       if(formData.userType=='Admin')
+        navigate('/dashboard/admin') 
+      window.location.reload(); 
     } catch (error) {
       console.error(error);
       setErrors({ ...errors, password: error.message });
@@ -70,19 +73,15 @@ function Signup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-stone-950 p-4">
       <div className="bg-stone-800 rounded-lg shadow-lg p-8 w-full max-w-md">
-        <div className="mx-auto text-center mb-6">
-          <span className="relative left-5 text-xl bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg">
+        <div className="mx-auto text-center mb-8">
+          <span className="relative left-5 text-xl bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg text-white font-semibold">
             SOBUJ
           </span>
-          <span className="bg-green-600 pl-6 pr-2 py-1 text-xl rounded-lg">
+          <span className="bg-green-600 pl-6 pr-2 py-1 text-xl rounded-lg text-white font-semibold">
             BANGLA
           </span>
         </div>
         
-
-        <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
-          Sign Up
-        </h1>
         <div className="my-4">
           {/* <p className="text-white text-xl font-semibold mb-2">User Type:</p> */}
           <div className="flex space-x-4">
@@ -124,7 +123,7 @@ function Signup() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+              className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                 errors.name ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your name"
@@ -148,7 +147,7 @@ function Signup() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+              className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your email"
@@ -172,7 +171,7 @@ function Signup() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+              className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                 errors.password ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your password"

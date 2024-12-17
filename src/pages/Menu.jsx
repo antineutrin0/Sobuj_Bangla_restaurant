@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import foodData from "../components/foodData.json"; // Import the JSON file
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../appwrite/AuthConfig";
 
 const Menu = ({orderDetail}) => {
   const navigate = useNavigate();
-
+  const {user}=useAuth();
   const handleOrder = (id) => {
-    navigate(`${id}`);  
+    if(user)
+    navigate(`${id}`); 
+  else
+  navigate('/signin'); 
   };
 
   return (
-   <div>
-    <div className="flex justify-end mr-4 mt-4">
-          <button className="bg-emerald-500 p-2 text-xl font-semibold rounded-lg text-black "
-          onClick={()=>{
-            navigate("orderedlist")
-          }}
-          >Place Order</button>
-         </div>
+   <div >
+    <div className=' border p-2 rounded-lg my-6 lg:my-8 w-full md:w-1/2 mx-auto'>
+        <p className='backdrop-blur-md text-amber-600 text-center text-3xl font-semibold py-2 '>Add Items To Card</p>
+      </div>
+         
      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 p-6 bg-stone-950">
          
          {foodData.map((food) => (
@@ -37,7 +38,7 @@ const Menu = ({orderDetail}) => {
                <div className="mt-4 flex justify-end">
                  <button
                    onClick={() => handleOrder(food.id)} 
-                   className="px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700"
+                   className="px-4 py-2 bg-amber-700 text-black font-bold rounded hover:bg-blue-700"
                  >
                    Take Item
                  </button>

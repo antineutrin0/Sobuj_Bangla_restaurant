@@ -16,24 +16,11 @@ import BookTable from './pages/BookTable.jsx';
 import SingleItem from './components/SingleItem.jsx';
 import OrderedFood from './components/OrderedFood.jsx';
 import OrderHistory from './components/OrderHistory.jsx';
+import Review from './components/Review.jsx';
+import Contact from './pages/Contact.jsx';
+import MyCard from './components/MyCard.jsx';
 
-// Move useState inside a component like App
 function Root() {
-  const [orderDetail, setOrderDetail] = useState([]);
-
-  const addToOrder = (item) => {
-    setOrderDetail((prev) => {
-      const itemIndex = prev.findIndex((order) => order.id === item.id);
-      if (itemIndex === -1) {
-        return [...prev, item];
-      } else {
-        const updatedOrder = [...prev];
-        updatedOrder[itemIndex].quantity += item.quantity;
-        return updatedOrder;
-      }
-    });
-    console.log(orderDetail);
-  };
 
 
   const router = createBrowserRouter([
@@ -58,6 +45,30 @@ function Root() {
           element: <Table></Table>
         },
         {
+          path:'/menu',
+          element:<Menu></Menu>
+        },
+        {
+        path:'/menu/:id',
+        element:<SingleItem ></SingleItem>
+        },
+        {
+          path:'/fooditem/:id',
+          element:<SingleItem></SingleItem>
+        },
+        {
+          path:'/menu/orderedlist',
+          element:<OrderedFood ></OrderedFood>
+        },
+        {
+          path:'/review',
+          element:<FoodReviewForm></FoodReviewForm>
+        },
+        {
+         path:'/contact',
+         element:<Contact></Contact>
+        },
+        {
           path: '/dashboard',
           element: <DashBoard></DashBoard>,
           children: [
@@ -67,7 +78,7 @@ function Root() {
               children: [
                 {
                  path:'',
-                 element:<Menu orderDetail={orderDetail}></Menu> 
+                 element:<Menu ></Menu> 
                 },
                 {
                 path:'orderhistory',
@@ -75,15 +86,15 @@ function Root() {
                 },
                 {
                   path: 'orderfood',
-                  element: <Menu orderDetail={orderDetail}></Menu>
+                  element: <Menu ></Menu>
                 },
                 {
                  path:'orderfood/orderedlist',
-                 element:<OrderedFood orderDetail={orderDetail}></OrderedFood>
+                 element:<OrderedFood ></OrderedFood>
                 },
                 {
                   path: 'orderfood/:id',
-                  element: <SingleItem addToOrder={addToOrder}></SingleItem> // Pass addToOrder as a prop
+                  element: <SingleItem ></SingleItem> 
                 },
                 {
                   path: 'booktable',
@@ -92,6 +103,11 @@ function Root() {
                 {
                   path: 'reviewfood',
                   element: <FoodReviewForm></FoodReviewForm>
+                },
+                {
+                  path:'mycard',
+                  element:<MyCard ></MyCard>
+
                 }
               ]
             },
@@ -106,7 +122,7 @@ function Root() {
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
-    </React.StrictMode>
+    </React.StrictMode> 
   );
 }
 
