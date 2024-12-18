@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Query } from 'appwrite';
+import { Client, Databases, ID, Query, Storage } from 'appwrite';
 import conf from '../conf/conf.js';
 
 export class Service {
@@ -11,7 +11,7 @@ export class Service {
             .setEndpoint(conf.sobujbanglaURL)
             .setProject(conf.sobujbanglaProjectId);
         this.databases = new Databases(this.client);
-        // this.bucket = new Storage(this.client);
+         this.bucket = new Storage(this.client);
     }
 
     async  makereview({ name, gmail, profile,category,rating,review }) {
@@ -211,8 +211,101 @@ export class Service {
                       throw error; 
                     }
                 }
-  
 
+                
+      async  uploadProfile  (file)  {
+        console.log(file);
+            if (!file) return;
+            try {
+            const response = await this.bucket.createFile(
+                conf.sobujbanglaBucketId,
+                 ID.unique(),
+                  file
+                ); 
+                console.log(response);
+            console.log(response.$id); 
+            try {
+                const fileURL = this.bucket.getFileView(conf.sobujbanglaBucketId, response.$id);
+                console.log("File URL:", fileURL);
+                return fileURL; 
+              } catch (error) {
+                console.error("Error fetching file URL:", error.message);
+              }
+            } catch (error) {
+            console.error('Error uploading photo:', error);
+            alert('Failed to upload photo. Please try again.');
+            }
+        };
+
+        async updateUserData({photo_URL,email,phone,about,address}){
+            console.log("database",email);
+            try{
+                const response=await this.databases.listDocuments(
+                    conf.sobujbanglaDatabaseId, 
+                    conf.sobujbanglaUserCollectionId,
+                    [Query.equal('email',email)] 
+                );
+                
+            if(response.documents.length==0)
+                 {
+                    try {
+                return await this.databases.createDocument(
+                    conf.sobujbanglaDatabaseId,
+                    conf.sobujbanglaUserCollectionId,
+                    ID.unique(),{
+                       photo_URL,
+                       email,
+                       phone,
+                       about,
+                       address,
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+        else{
+            try {
+                return await this.databases.updateDocument(
+                    conf.sobujbanglaDatabaseId,
+                    conf.sobujbanglaUserCollectionId,
+                    response.documents[0].$id,
+                    {
+                        photo_URL,
+                        email,
+                        phone,
+                        about,
+                        address
+                    }
+                )
+                
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        }
+        catch(error){
+
+        }
+    }
+        async getUserData(email){
+            try {
+                const response = await this.databases.listDocuments(
+                  conf.sobujbanglaDatabaseId,
+                  conf.sobujbanglaUserCollectionId,
+                  [Query.equal('email',email)]
+                );
+                console.log('Fetched Document:', response);
+                
+               return response.documents; 
+              } catch (error) {
+                console.error('Error fetching document:', error);
+                throw error; 
+              }
+        }
+      
     // async getUserDetails(email) {
     //     try {
     //       // Make a request to fetch the document by email

@@ -19,6 +19,7 @@ import OrderHistory from './components/OrderHistory.jsx';
 import Review from './components/Review.jsx';
 import Contact from './pages/Contact.jsx';
 import MyCard from './components/MyCard.jsx';
+import UpdateProfile from './components/UpdateProfile.jsx';
 
 function Root() {
 
@@ -108,6 +109,10 @@ function Root() {
                   path:'mycard',
                   element:<MyCard ></MyCard>
 
+                },
+                {
+                  path:'updateprofile',
+                  element:<UpdateProfile></UpdateProfile>
                 }
               ]
             },

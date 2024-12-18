@@ -1,42 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Client, Account } from "appwrite";
 import { useAuth } from "../appwrite/AuthConfig";
 import { LuTriangleAlert } from "react-icons/lu";
 import { BsPciCard } from "react-icons/bs";
+import { GiUpgrade } from "react-icons/gi";
+import service from "../appwrite/databaseConfig";
+
 const Customersideber = () => {
   const navigate = useNavigate();
    const {user,logout}=useAuth();
    const [clicklogout,setclicklogout]=useState(false);
+   const [userData,setuserData]=useState([]);
   const handleLogout =  () => {
     setclicklogout(!clicklogout);
      
   };
 
+  useEffect(()=>{
+    const data=async()=>{
+
+      try {
+        const response=await service.getUserData(user.email);
+        setuserData(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    data();
+  },[])
+
   const handleLogoutclicked = async () => {
     try {
      await logout();
-      navigate("/"); // Redirect to login page after logout
+      navigate("/"); 
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
   return (
-    <div className=" w-full bg-stone-800 flex flex-col justify-start  items-center">
+    <div className="w-full bg-stone-800 flex flex-col justify-start items-center">
       
       <div className="flex flex-col justify-center items-center  bg-cyan-700 w-full h-1/3 p-4  rounded-xl">
         <div className="flex justify-center items-center">
-          <img
+        <img
             className="object-cover h-40 w-40 rounded-full"
-            src="https://i.ibb.co.com/VLttntY/c04b017b6b9d1c189e15e6559aeb3ca8.png"
+            src={
+              userData.length > 0
+                ? userData[0].photo_URL
+                : "https://i.ibb.co.com/VLttntY/c04b017b6b9d1c189e15e6559aeb3ca8.png"
+            }
             alt="User Profile"
           />
         </div>
-          <div className="h-full w-full flex flex-col justify-center items-center">
-            <h1 className="text-white text-xl font-bold mb-2">{user.name}</h1>
-            <p className="text-white text-sm">{user.email}</p>
+         <div >
+         <div className="h-full w-full flex flex-col justify-center items-start ">
+            <h1 className="text-white text-xl font-bold my-2 mx-auto ">{user.name}</h1>
+            <p className="text-white text-lg font-semibold  ">Email:<span className="text-lg font-normal"> {user.email}</span></p>
           </div>
+          {userData.length > 0 && (
+        <div className="w-full flex flex-col items-start pb-4  ">
+          <p className="text-white text-sm ">
+            <span className="text-lg font-semibold  ">Phone:</span> {userData[0].phone || "N/A"}
+          </p>
+          <p className="text-white text-sm ">
+            <span className="text-lg font-semibold">Address:</span> {userData[0].address || "N/A"}
+          </p>
+          <p className="text-white text-sm ">
+            <span className="text-lg font-semibold">About:</span> {userData[0].about || "N/A"}
+          </p>
+        </div>
+      )}
+         </div>
       </div>
 
       <aside className="w-full" aria-label="Sidebar">
@@ -65,7 +101,7 @@ const Customersideber = () => {
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
          <BsPciCard className="text-gray-400"/>
-          <span className="ml-3">My Card</span>
+          <span className="ml-3">My Cart</span>
         </button>
       </li>
       <li>
@@ -129,6 +165,15 @@ const Customersideber = () => {
             <path d="M10 1a9 9 0 100 18A9 9 0 1010 1zM8 11.5l-3-3 1.5-1.5L8 8.5l4.5-4.5L14 5l-6 6z"></path>
           </svg>
           <span className="ml-3">Donation</span>
+        </button>
+      </li>
+      <li >
+        <button
+          onClick={() => navigate("updateprofile")}
+          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+        >
+         <GiUpgrade  className="text-gray-400 text-3xl font-bold"/>
+          <span className="ml-3">Update Profile</span>
         </button>
       </li>
       <li>

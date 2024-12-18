@@ -142,7 +142,7 @@ const Header = () => {
                 navigate(  'dashboard/customer/orderfood');
                 }}
             >
-                Explore
+                Order Now
             </button>
             ) : (
             <button onClick={dashboardbtn}>Dashboard</button>

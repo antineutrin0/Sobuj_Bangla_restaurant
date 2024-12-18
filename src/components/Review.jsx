@@ -111,10 +111,12 @@ const Review = () => {
                 <div>
                   <h5 className="text-lg font-bold text-white">{review.name}</h5>
                   <p className="text-sm text-gray-400">{review.gmail}</p>
+                  <div className="text-lg text-white"><span className="text-lg font-bold bg-gray-700 rounded-lg text-gray-50">Category: </span>{review.category}</div>
                   <StarRating rating={review.rating} />
+
                 </div>
               </div>
-              <p className="text-gray-300">{review.review}</p>
+              <p className="text-gray-100"><span className="text-lg font-bold ">Comment: </span>{review.review}</p>
             </div>
           ))}
         </div>
