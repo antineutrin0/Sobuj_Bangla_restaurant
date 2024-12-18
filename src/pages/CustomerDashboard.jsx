@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TbLayoutSidebarLeftExpandFilled, TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
-import Customersideber from '../components/customersideber';
+import Customersideber from '../components/Customersideber';
 import { Outlet } from 'react-router-dom';
 
 function CustomerDashboard() {
