@@ -4,7 +4,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { div } from "framer-motion/client";
 import Menu from "./pages/Menu";
 import Body1 from "./components/Body1";
-import Header from "./components/header";
+import Header from "./components/Header";
 import Review from "./components/Review";
 import ItemCarosel from "./components/ItemCarosel";
 import Chefs from "./components/Chefs";
