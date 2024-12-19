@@ -14,12 +14,11 @@ function BookTable() {
     const dates = [];
     const now = new Date();
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 0; i <= 7; i++) {
       const futureDate = new Date();
       futureDate.setDate(now.getDate() + i);
-      dates.push(futureDate.toISOString().split('T')[0]); 
+      dates.push(futureDate.toISOString().split('T')[0]);
     }
-
     return dates;
   };
 
@@ -32,7 +31,7 @@ function BookTable() {
   };
 
   const now = new Date();
-  now.setDate(now.getDate() + 1);
+  console.log("now date",now);
   const today = now.toISOString().split('T')[0];
   const currentHour = new Date().getHours();
   const isToday = selectedDate === today;

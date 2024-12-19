@@ -86,7 +86,7 @@ const Customersideber = ({toggleSidebar}) => {
            
           }
           }
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
             className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -107,7 +107,7 @@ const Customersideber = ({toggleSidebar}) => {
             navigate("mycard")
           }
           }
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
          <BsPciCard className="text-gray-400"/>
           <span className="ml-3">My Cart</span>
@@ -120,7 +120,7 @@ const Customersideber = ({toggleSidebar}) => {
             navigate("booktable")
           
           }}
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
             className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -139,7 +139,7 @@ const Customersideber = ({toggleSidebar}) => {
             toggleSidebar();
             navigate("orderhistory")
           }}
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
             className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -159,7 +159,7 @@ const Customersideber = ({toggleSidebar}) => {
             navigate("reviewfood")
           
           }}
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
             className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -174,7 +174,7 @@ const Customersideber = ({toggleSidebar}) => {
       </li>
       <li>
         <button
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         onClick={()=>{
           toggleSidebar();
         }}
@@ -197,7 +197,7 @@ const Customersideber = ({toggleSidebar}) => {
             toggleSidebar();
             navigate("updateprofile")
           }}
-          className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
          <GiUpgrade  className="text-gray-400 text-3xl font-bold"/>
           <span className="ml-3">Update Profile</span>
@@ -207,7 +207,7 @@ const Customersideber = ({toggleSidebar}) => {
         <button
           onClick={
             handleLogout}
-          className="flex items-center p-4 w-full text-xl font-semibold  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center p-4 w-full text-lg font-semibold  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
             className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"

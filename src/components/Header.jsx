@@ -117,7 +117,7 @@ const Header = () => {
             </button>
         </div>
         ) : (
-        <div className="text-center text-lg lg:text-2xl text-black font-semibold bg-amber-600 p-1 md:px-4 md:py-2 rounded-lg hover:bg-amber-700">
+        <div className="text-center text-lg lg:text-2xl text-black font-semibold bg-amber-600 p-1 md:px-2 md:py-1 rounded-lg hover:bg-amber-700">
             {user.prefs && user.prefs.role === "Customer" ? (
             <button
                 onClick={() => {
@@ -174,7 +174,7 @@ const Header = () => {
         <p className="hidden lg:block text-lg font-thin mt-2 rounded-lg p-2">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
         </div>
       <div className="mt-4 lg:-mt-12 lg:mb-24 z-10 flex mx-auto md:mx-0 ">
-         <button className=" text-center ml-28  md:ml-80 text-xl md:text-3xl text-black font-bold bg-amber-700 p-4 md:p-6 rounded-2xl hover:bg-amber-600"
+         <button className=" text-center ml-28  md:ml-80 text-xl md:text-3xl text-black font-bold bg-amber-600 p-4 md:p-5 rounded-2xl hover:bg-amber-700"
          onClick={()=>{
           if(user)
             navigate('/dashboard/customer/booktable')

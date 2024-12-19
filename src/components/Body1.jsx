@@ -38,7 +38,7 @@ const Body1 = () => {
         <p className="text-xl md:text-2xl text-start font-bold border border-amber-600 p-2 rounded-lg">Our Exclusivity</p>
         <h2 className="text-lg md:text-lx italic  text-center">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</h2>
       <div className=" flex mx-auto md:mx-0 ">
-         <button className=" text-center mt-8   text-lg md:text-xl text-black font-bold bg-amber-700 p-4 px-8 rounded-lg hover:bg-amber-600"
+         <button className=" text-center mt-8   text-lg md:text-xl text-black font-bold bg-amber-600 p-4 px-8 rounded-lg hover:bg-amber-700"
          onClick={()=>{
           if(user)
             navigate('/dashboard/customer')

@@ -39,12 +39,19 @@ function OrderedFood() {
 
     async function placeorder() {
         try {
-            const orderDetailString = JSON.stringify(orderDetail);
+            const OrderDetailString = orderDetail.map(order => ({
+                id: order.itemId,
+                itemName: order.itemName,
+                quantity: order.quantity,
+                price: order.totalPrice,
+              }));
+            console.log("stringify",OrderDetailString);
+           const orderstringify=JSON.stringify(OrderDetailString);
             
             await service.placeOrder({
                 customerName: user.name,
                 customerEmail: user.email,
-                orderItem: orderDetailString,
+                orderItem: orderstringify,
                 totalPrice: total.toFixed(2),
             });
            

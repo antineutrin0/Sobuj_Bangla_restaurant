@@ -61,7 +61,7 @@ const MyCard = () => {
               key={card.id}
               className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 relative"
             >
-              <div className="hidden md:block">
+              <div className="block">
                 <img
                   src={card.image}
                   alt={card.name}
@@ -103,7 +103,7 @@ const MyCard = () => {
       {foodItem.length > 0 && (
         <div className="flex justify-center my-20">
           <button
-            className="text-2xl p-4 font-bold bg-amber-700 hover:bg-amber-600 rounded-lg text-black"
+            className="text-2xl p-4 font-bold bg-amber-600 hover:bg-amber-700 rounded-lg text-black"
             onClick={() => {
               navigate("/dashboard/customer/orderfood/orderedlist");
             }}

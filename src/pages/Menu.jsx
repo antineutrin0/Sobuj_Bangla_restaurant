@@ -38,7 +38,7 @@ const Menu = () => {
                <div className="mt-4 flex justify-end">
                  <button
                    onClick={() => handleOrder(food.id)} 
-                   className="px-4 py-2 bg-amber-700 text-black font-bold rounded hover:bg-blue-700"
+                   className="px-4 py-2 bg-amber-600 text-black font-bold rounded hover:bg-blue-700"
                  >
                    Take Item
                  </button>

@@ -127,8 +127,9 @@ export class Service {
             const response = await this.databases.listDocuments(
                         conf.sobujbanglaDatabaseId,
                         conf.sobujbanglaOrderCollectionId,
-                        [Query.equal('customerEmail', email)]
+                        [Query.equal('customerEmail', email),Query.orderDesc('$createdAt')]
                       );
+                      console.log("form",response);
                       return response;
         } catch (error) {
              console.log(error)
@@ -185,7 +186,7 @@ export class Service {
                   const response = await this.databases.listDocuments(
                     conf.sobujbanglaDatabaseId,
                     conf.sobujbanglaUserCardCollectionId,
-                    [Query.equal('email',email)]
+                    [Query.equal('email',email),Query.orderDesc('$createdAt')]
                   );
                   console.log('Fetched Document:', response);
                   
@@ -201,7 +202,8 @@ export class Service {
                       
                       const response = await this.databases.listDocuments(
                         conf.sobujbanglaDatabaseId,
-                        collectionId
+                        collectionId,
+                        [Query.orderDesc('$createdAt')]
                       );
                       console.log('Fetched Document:', response);
                       

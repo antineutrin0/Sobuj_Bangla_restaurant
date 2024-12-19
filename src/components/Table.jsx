@@ -131,7 +131,7 @@ function Table({ formData,showTable }) {
   }
 
   return (
-    <div className="w-full lg:w-2/3 flex flex-col mx-auto items-center justify-center p-6 bg-stone-950">
+    <div className="w-full flex flex-col mx-auto items-center justify-center p-6 bg-stone-950">
       <h1 className="text-2xl font-bold text-white mb-4">Map of Tables</h1>
       <div className="flex flex-row space-x-4 my-4">
         <div className="bg-red-600 text-black py-3 px-1 rounded-lg font-semibold">
@@ -190,7 +190,7 @@ function Table({ formData,showTable }) {
       </div>
       <button
         onClick={handleBookAll}
-        className={`my-16 px-6 py-2 md:py-4 font-bold text-xl rounded-lg ${
+        className={`my-16 px-3 py-1 md:py-2 font-bold text-xl rounded-lg ${
           isBooked ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700 text-white"
         }`}
         disabled={isBooked} // Disable if already booked

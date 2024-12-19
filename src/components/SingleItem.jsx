@@ -63,10 +63,10 @@ function SingleItem() {
     <div className="h-screen flex flex-col items-center justify-center">
       <div
         key={singleitem.id}
-        className="bg-stone-900 rounded-lg shadow-lg flex flex-col items-center justify-center w-full md:w-2/3 lg:w-1/3 h-2/3 mx-4 md:mx-auto transition-transform transform hover:scale-105"
+        className="bg-stone-900 rounded-lg shadow-lg flex flex-col items-center justify-center w-full md:w-2/3 lg:w-1/3  mx-4 md:mx-auto transition-transform transform hover:scale-105"
       >
         <div>
-          <h2 className="text-2xl font-bold text-white">{singleitem.name}</h2>
+          <h2 className="text-2xl font-bold text-white mt-4">{singleitem.name}</h2>
         </div>
         <div className="flex items-center">
           <img
@@ -74,13 +74,12 @@ function SingleItem() {
             alt={singleitem.name}
             className="w-full h-64 object-cover"
           />
-          <div className="p-4">
-            <p className="text-white mt-2">{singleitem.description}</p>
+        </div>
+        <div className="p-4">
             <p className="text-xl font-bold text-white mt-2">
-              ${singleitem.price}
+              Price: ${singleitem.price}
             </p>
           </div>
-        </div>
         <div className="flex flex-col items-center mt-6">
           <div className="flex items-center space-x-4">
             <p className={` text-xl text-white font-bold rounded ${

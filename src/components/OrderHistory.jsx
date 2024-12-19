@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import service from "../appwrite/databaseConfig";
 import { useAuth } from "../appwrite/AuthConfig";
-import { div } from "framer-motion/client";
 
 function OrderHistory() {
   const [orderHistory, setOrderHistory] = useState([]);
@@ -12,22 +11,23 @@ function OrderHistory() {
       try {
         const response = await service.getOrderHistory(user.email);
         const data = response.documents;
+        console.log("fetch",data);
         if (data) {
-          const parsedData = data.map((order) => {
-            if (typeof order.orderItem === "string") {
+          const parsedData = data.map((order) => {    
               order.orderItem = JSON.parse(order.orderItem);
-            }
-            return order;
+              return order;
           });
           setOrderHistory(parsedData);
+          console.log(orderHistory);
         }
       } catch (error) {
         console.error("Error fetching order history:", error);
       }
     };
 
-    if (user && user.email) {
+    if (user) {
       fetchOrderHistory();
+      console.log(orderHistory);
     }
   }, [user]);
 
@@ -65,7 +65,14 @@ function OrderHistory() {
                     ))}
                   </div>
                   <div>
-                    <p className=" text-lg font-semibold text-gray-400">Total Price:${order.totalPrice}</p>
+                    <p>Date</p>
+                    {
+                       order.$createdAt.split("T")[0]
+                    }
+                  </div>
+                  <div>
+                    <p>Total</p>
+                    <p className=" text-sm font-semibold text-gray-400">${order.totalPrice}</p>
                   </div>
                 </div>
               </li>
