@@ -52,7 +52,7 @@ function OrderedFood() {
                 customerName: user.name,
                 customerEmail: user.email,
                 orderItem: orderstringify,
-                totalPrice: total.toFixed(2),
+                totalPrice: totalprice.toFixed(2),
             });
            
             orderDetail.map(order=>{

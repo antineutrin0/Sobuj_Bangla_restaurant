@@ -103,7 +103,7 @@ const MyCard = () => {
       {foodItem.length > 0 && (
         <div className="flex justify-center my-20">
           <button
-            className="text-2xl p-4 font-bold bg-amber-600 hover:bg-amber-700 rounded-lg text-black"
+            className="text-2xl p-2 md:p-4 font-bold bg-amber-600 hover:bg-amber-700 rounded-lg text-black"
             onClick={() => {
               navigate("/dashboard/customer/orderfood/orderedlist");
             }}
