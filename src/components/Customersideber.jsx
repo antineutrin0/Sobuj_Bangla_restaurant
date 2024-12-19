@@ -7,7 +7,7 @@ import { BsPciCard } from "react-icons/bs";
 import { GiUpgrade } from "react-icons/gi";
 import service from "../appwrite/databaseConfig";
 
-const Customersideber = () => {
+const Customersideber = ({toggleSidebar}) => {
   const navigate = useNavigate();
    const {user,logout}=useAuth();
    const [clicklogout,setclicklogout]=useState(false);
@@ -80,7 +80,12 @@ const Customersideber = () => {
     <ul className="space-y-6 ml-4">
       <li>
         <button
-          onClick={() => navigate("orderfood")}
+          onClick={() => {
+            toggleSidebar();
+            navigate("orderfood")
+           
+          }
+          }
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
@@ -97,7 +102,11 @@ const Customersideber = () => {
       </li>
       <li >
         <button
-          onClick={() => navigate("mycard")}
+          onClick={() => {
+            toggleSidebar();
+            navigate("mycard")
+          }
+          }
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
          <BsPciCard className="text-gray-400"/>
@@ -106,7 +115,11 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("booktable")}
+          onClick={() => {
+            toggleSidebar();
+            navigate("booktable")
+          
+          }}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
@@ -122,7 +135,10 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("orderhistory")}
+          onClick={() => {
+            toggleSidebar();
+            navigate("orderhistory")
+          }}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
@@ -138,7 +154,11 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={() => navigate("reviewfood")}
+          onClick={() => {
+            toggleSidebar();
+            navigate("reviewfood")
+          
+          }}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg
@@ -155,7 +175,11 @@ const Customersideber = () => {
       <li>
         <button
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+        onClick={()=>{
+          toggleSidebar();
+        }}
         >
+
           <svg
             className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor"
@@ -169,7 +193,10 @@ const Customersideber = () => {
       </li>
       <li >
         <button
-          onClick={() => navigate("updateprofile")}
+          onClick={() => {
+            toggleSidebar();
+            navigate("updateprofile")
+          }}
           className="flex items-center p-4 w-full text-xl font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
          <GiUpgrade  className="text-gray-400 text-3xl font-bold"/>
@@ -178,7 +205,8 @@ const Customersideber = () => {
       </li>
       <li>
         <button
-          onClick={handleLogout}
+          onClick={
+            handleLogout}
           className="flex items-center p-4 w-full text-xl font-semibold  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <svg

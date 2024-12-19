@@ -62,7 +62,7 @@ function Signin() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-lg border px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your email"
               required
             />
@@ -81,7 +81,7 @@ function Signin() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-lg border px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your password"
               required
             />

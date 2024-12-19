@@ -39,40 +39,22 @@ const Header = () => {
          
       }}
     >
-      {/* Navbar */}
       <nav className="flex justify-between items-center p-4 bg-dark bg-opacity-50  top-0 w-full">
-      <div className="flex flex-col md:flex-row items-center justify-between mx-auto w-full max-w-4xl space-y-2 md:space-y-0 md:space-x-6">
-  {/* First Div */}
-  <div className="text-white text-2xl font-bold rounded-xl p-2  roboto-text flex flex-row w-4/5 justify-between">
-   <div className="-mx-5">
+     
+  <div className="text-white text-xl font-bold rounded-xl p-2  roboto-text flex flex-row  justify-between ">
    <span className="relative left-5  bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg">
       SOBUJ
     </span>
-    <span className="bg-green-600 pl-6 pr-2 py-1 rounded-lg">
+    <span className="bg-green-600 text-black pl-6 pr-2 py-1 rounded-lg">
       BANGLA
     </span>
-   </div>
-    <div className="md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white text-3xl"
-          >
-            {isMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
   </div>
 
- 
-</div>
-
-
-        {/* Nav Items */}
-        <div
-          className={`absolute md:static top-16 right-0 mr-8 bg-dark bg-opacity-90 md:w-auto md:flex md:items-center space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0  ${
+        <div className="flex felx-col md:flex-row">
+         <div className={`absolute md:static top-16 right-0 bg-dark bg-opacity-90 backdrop-blur-lg md:backdrop-blur-0 md:w-auto md:flex md:items-center space-y-4 md:space-y-0 md:space-x-4 p-4 md:p-0 z-20 ${
             isMenuOpen ? " items-start left-2/3 flex flex-col" : "hidden"
-          }`}
-        >
-          <button
+          }`}>
+         <button
             onClick={() => {
               setIsMenuOpen(false);
               navigate("/");
@@ -100,7 +82,7 @@ const Header = () => {
             }}
             className="text-white text-lg md:text-xl hover:underline"
           >
-            BookNow
+            Book Now
           </button>
           <button
             onClick={() => {
@@ -135,27 +117,36 @@ const Header = () => {
             </button>
         </div>
         ) : (
-        <div className="text-center text-xl lg:text-2xl text-black font-semibold bg-amber-600 px-4 py-2 rounded-lg hover:bg-amber-700">
+        <div className="text-center text-lg lg:text-2xl text-black font-semibold bg-amber-600 p-1 md:px-4 md:py-2 rounded-lg hover:bg-amber-700">
             {user.prefs && user.prefs.role === "Customer" ? (
             <button
                 onClick={() => {
                 navigate(  'dashboard/customer/orderfood');
                 }}
             >
-                Order Now
+              <span>OrderNow</span>
             </button>
             ) : (
             <button onClick={dashboardbtn}>Dashboard</button>
             )}
         </div>
         )}
+         </div>
+         <div className="md:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-gray-300 text-2xl"
+          >
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
 
         </div>
       </nav>
 
-      <div className="flex flex-col justify-center items-center md:items-start  h-full text-center text-white p-6">
-        <div className=" backdrop-blur-lg p-16 rounded-lg">
-        <div className=" flex items-center bg-green-600 border-white border-2 p-1 py-2 mt-4 mb-8 rounded-full mx-auto flex-1 w-4/5">
+      <div className="flex flex-col justify-center items-center md:items-start  h-full text-center text-white p-8">
+        <div className=" backdrop-blur-lg p-2 lg:p-16 rounded-lg">
+        <div className=" flex items-center bg-green-600 border-white border-2  mt-4 mb-8 rounded-full mx-auto flex-1 w-full lg:w-4/5">
         <select
     className="bg-transparent text-xl text-gray-900 font-semibold px-2 outline-none w-full"
     value={searchQuery}
@@ -178,12 +169,12 @@ const Header = () => {
     <ImSearch />
   </button>
   </div>
-        <p className="text-4xl md:text-6xl text-start font-bold">Enjoy Our Meal</p>
-        <h2 className="text-3xl md:text-5xl italic font-bold text-end ">On Black Plate</h2>
-        <p className="text-lg font-thin">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
+        <p className="text-2xl md:text-4xl text-right font-bold mr-4 mb-4 ">Enjoy Our Meal</p>
+        <h2 className="text-xl pb-8 md:pb-2 md:text-3xl italic font-bold text-start ml-4 text-gray-900 mt-2"><span className="border p-1 rounded-xl bg-gray-100">On Black Plate</span></h2>
+        <p className="hidden lg:block text-lg font-thin mt-2 rounded-lg p-2">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
         </div>
-      <div className=" -mt-16  z-10 flex mx-auto md:mx-0 ">
-         <button className=" text-center mt-8  md:ml-80 text-2xl md:text-4xl text-black font-bold bg-amber-700 p-8 rounded-2xl hover:bg-amber-600"
+      <div className="mt-4 lg:-mt-12 lg:mb-24 z-10 flex mx-auto md:mx-0 ">
+         <button className=" text-center ml-28  md:ml-80 text-xl md:text-3xl text-black font-bold bg-amber-700 p-4 md:p-6 rounded-2xl hover:bg-amber-600"
          onClick={()=>{
           if(user)
             navigate('/dashboard/customer/booktable')

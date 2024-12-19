@@ -10,6 +10,7 @@ function CustomerDashboard() {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
+
   return (
     <div className="bg-stone-950 min-h-screen">
       {/* Button to toggle the sidebar (visible only on small devices) */}
@@ -29,7 +30,7 @@ function CustomerDashboard() {
         <div
           className={`w-4/5 absolute z-10 md:static md:w-1/3 ${isSidebarVisible ? "block" : "hidden"} md:block`}
         >
-          <Customersideber />
+          <Customersideber toggleSidebar={toggleSidebar} />
         </div>
        <div className='z-0 w-full '>
         <Outlet></Outlet>

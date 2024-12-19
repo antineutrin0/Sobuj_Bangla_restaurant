@@ -5,16 +5,13 @@ import { FaFacebookF, FaTwitter, FaGithub, FaLinkedinIn, FaInstagram } from "rea
 const Footer = () => {
   return (
     <footer className="bg-stone-950 text-gray-600">
-      {/* Top Join Us Button */}
       <div className="flex justify-center py-6">
         <button className=" text-white px-6 py-2 rounded-lg text-xl md:text-2xl shadow border border-amber-700">
           Join Our Community
         </button>
       </div>
 
-      {/* Main Footer Content */}
       <div className="container mx-auto px-6 text-center">
-        {/* Logo and Navigation Links */}
         <div className="flex flex-col items-center space-y-4">
         <div className="-mx-5">
    <span className="relative left-5  bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg text-black font-semibold">
@@ -24,10 +21,9 @@ const Footer = () => {
       BANGLA
     </span>
    </div>
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-2 md:space-x-6">
             {[
               "About",
-              "Features",
               "Review",
               "Services",
               "Partners",
