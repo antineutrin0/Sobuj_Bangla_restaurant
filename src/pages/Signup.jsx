@@ -12,12 +12,14 @@ function Signup() {
     password: '',
     userType: 'Customer', // Default user type
   });
+  const [secretkey,setsecretkey]=useState("");
 
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     password: '',
     userType: '',
+    secretkey:''
   });
 
   const navigate = useNavigate();
@@ -39,6 +41,11 @@ function Signup() {
       newErrors.password = 'Password must be at least 6 characters long.';
       isValid = false;
     }
+    if(formData.userType=="Admin"&&secretkey!="sobujbangla")
+    {
+      newErrors.secretkey='Secret Key is wrong';
+      isValid=false;
+    }
 
     setErrors(newErrors);
     return isValid;
@@ -51,6 +58,10 @@ function Signup() {
       [name]: value,
     });
   };
+  const handlesecretkey=(e)=>{
+    const value=e.target.value;
+    setsecretkey(value);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -180,6 +191,25 @@ function Signup() {
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
             )}
+          </div>
+          <div className={`${formData.userType=="Admin"?'block':'hidden'}`}>
+            <label htmlFor="Secret Key"
+            className='block text-sm font-medium text-white'
+            >Secret Key</label>
+            <input type="text"
+            id="key"
+            name="Secret Key"
+            value={secretkey}
+            onChange={handlesecretkey}
+            className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+              errors.secretkey ? 'border-red-500' : 'border-gray-300'
+            }`}
+            placeholder="Enter Secret Key"
+            required
+          />
+          {errors.secretkey && (
+            <p className="text-red-500 text-sm mt-1">{errors.secretkey}</p>
+          )}
           </div>
 
           <div className="flex items-center justify-between">

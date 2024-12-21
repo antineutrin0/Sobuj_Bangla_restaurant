@@ -10,14 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.2.1",
+    "@mui/styled-engine-sc": "^6.2.1",
+    "@mui/x-charts": "^7.23.2",
     "aos": "^2.3.4",
-    "appwrite": "^16.0.2",
+    "appwrite": "^16.1.0",
     "daisyui": "^4.12.21",
     "framer-motion": "^11.13.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.0.2",
+    "recharts": "^2.15.0",
+    "styled-components": "^6.1.13",
     "uuid": "^11.0.3"
   },
   "devDependencies": {

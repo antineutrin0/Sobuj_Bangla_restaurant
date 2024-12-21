@@ -20,6 +20,12 @@ import Review from './components/Review.jsx';
 import Contact from './pages/Contact.jsx';
 import MyCard from './components/MyCard.jsx';
 import UpdateProfile from './components/UpdateProfile.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import AdminOutlet from './components/AdminOutlet.jsx';
+import NewOrders from './components/NewOrders.jsx';
+import AdminTableHistory from './components/AdminTableHistory.jsx';
+import AdminOrderHistory from './components/AdminOrderHistory.jsx';
+import AddFood from './components/AddFood.jsx';
 
 function Root() {
 
@@ -116,6 +122,37 @@ function Root() {
                 }
               ]
             },
+            {
+              path:'admin',
+              element:<AdminDashboard></AdminDashboard>,
+              children:[
+                {
+                  path:'',
+                  element:<AdminOutlet></AdminOutlet>
+                },
+                {
+                  path:'neworder',
+                  element:<NewOrders></NewOrders>
+
+                },
+                {
+                  path:'foodmenu',
+                  element:<Menu></Menu>
+                },
+                {
+                  path:'tablebooking',
+                  element:<AdminTableHistory></AdminTableHistory>
+                },
+                {
+                  path:'orderhistory',
+                  element:<AdminOrderHistory></AdminOrderHistory>
+                },
+                {
+                  path:'additem',
+                  element:<AddFood></AddFood>
+                }
+              ]
+            }
           ]
         }
       ]

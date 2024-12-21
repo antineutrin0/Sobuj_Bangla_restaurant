@@ -7,68 +7,93 @@ function OrderedFood() {
     const { user } = useAuth();
     const navigate = useNavigate(); 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false); 
-    const [orderDetail,setOrderDetail]=useState([]);
-    const [totalprice,settotalprice]=useState(0);
-    let total=0;
+    const [orderDetail, setOrderDetail] = useState([]);
+    const [totalprice, settotalprice] = useState(0);
+    const [location, setLocation] = useState("");
+    const [phone, setPhone] = useState("");
+    const [errors, setErrors] = useState({});
+    let total = 0;
 
-    useEffect(()=>{
-        const orderdata=async()=>{
+    useEffect(() => {
+        const orderdata = async () => {
             try {
-                const response=await service.getMyCardData(user.email);
+                const response = await service.getMyCardData(user.email);
                 setOrderDetail(response);
                 console.log(orderDetail);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-        }
+        };
         orderdata();
-    },[])
+    }, []);
 
-   useEffect(()=>{
-    console.log("total")
-    console.log("order",orderDetail);
-    const sum=()=>{
-        orderDetail.map(item => {
-           total+=Number(item.totalPrice);
-        });
-       settotalprice(total);
-    }
-    
-   sum();
-   },[orderDetail])
+    useEffect(() => {
+        console.log("total");
+        console.log("order", orderDetail);
+        const sum = () => {
+            orderDetail.map(item => {
+                total += Number(item.totalPrice);
+            });
+            settotalprice(total);
+        };
+
+        sum();
+    }, [orderDetail]);
 
     async function placeorder() {
+        const formErrors = {};
+
+        if (!location) {
+            formErrors.location = "Location is required.";
+        }
+
+        if (!phone) {
+            formErrors.phone = "Phone number is required.";
+        }
+
+        setErrors(formErrors);
+
+        if (Object.keys(formErrors).length > 0) {
+            return;
+        }
+
         try {
             const OrderDetailString = orderDetail.map(order => ({
                 id: order.itemId,
                 itemName: order.itemName,
                 quantity: order.quantity,
                 price: order.totalPrice,
-              }));
-            console.log("stringify",OrderDetailString);
-           const orderstringify=JSON.stringify(OrderDetailString);
-            
-            await service.placeOrder({
+            }));
+            console.log("stringify", OrderDetailString);
+            const orderstringify = JSON.stringify(OrderDetailString);
+
+            const formData = {
                 customerName: user.name,
                 customerEmail: user.email,
+                location,
+                phone,
                 orderItem: orderstringify,
                 totalPrice: totalprice.toFixed(2),
+                location:location,
+                phone:phone
+            };
+
+            await service.placeOrder(formData);
+
+            orderDetail.map(order => {
+                const deleteFromCard = async () => {
+                    try {
+                        await service.deleteFromCard(order.itemId, user.email);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                };
+                deleteFromCard();
             });
-           
-            orderDetail.map(order=>{
-             const deleteFromCard=async()=>{
-                try {
-                    await service.deleteFromCard(order.itemId,user.email)
-                    
-                } catch (error) {
-                    console.log(error);
-                }
-             }
-             deleteFromCard();
-            })
-            setShowSuccessAlert(true); 
+
+            setShowSuccessAlert(true);
             setTimeout(() => {
-                navigate('/dashboard/customer/orderfood'); 
+                navigate('/dashboard/customer/orderfood');
                 window.location.reload();
             }, 2000);
         } catch (error) {
@@ -158,23 +183,51 @@ function OrderedFood() {
                     Total: ${totalprice.toFixed(2)}
                 </p>
             </div>
-            <div className="flex items-center mt-8">
-               
-               {
-               orderDetail.length?<button
-                className="text-white mx-auto text-2xl bg-lime-700 hover:bg-green-600 rounded-lg px-4 py-1 text-center font-semibold "
-                onClick={placeorder}
-            >
-                Confirm Order
-            </button>:<p
-                className="text-white mx-auto text-2xl bg-amber-500 rounded-lg px-4 py-1 text-center font-semibold "
-            >
-                Items is Empty
-            </p>
-               }
-            </div>
-        </div>
-    );
-}
 
-export default OrderedFood;
+            <div className="flex flex-col items-center mt-8">
+            <div className="mb-4">
+                <label htmlFor="location" className="block text-white text-lg font-semibold">
+                    Location
+                </label>
+                <input
+                    id="location"
+                    type="text"
+                    className="w-full px-4 py-2 text-black rounded-lg"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                />
+                {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
+            </div>
+
+            <div className="mb-4">
+                <label htmlFor="phone" className="block text-white text-lg font-semibold">
+                    Phone Number
+                </label>
+                <input
+                    id="phone"
+                    type="text"
+                    className="w-full px-4 py-2 text-black rounded-lg"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+            </div>
+               {orderDetail.length ? (
+                   <button
+                       className="text-white mx-auto text-2xl bg-lime-700 hover:bg-green-600 rounded-lg px-4 py-1 text-center font-semibold"
+                       onClick={placeorder}
+                   >
+                       Confirm Order
+                   </button>
+               ) :
+               (
+                <p>Card is empty</p>
+               )
+            }
+
+            </div>
+            </div>
+             
+        );
+    }
+    export default OrderedFood;

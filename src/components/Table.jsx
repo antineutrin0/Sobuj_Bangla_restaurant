@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import tableData from "./tables.json"; // Assuming you store the JSON file in the same directory
 import service from "../appwrite/databaseConfig";
+import { useAuth } from "../appwrite/AuthConfig";
 
 function Table({ formData,showTable }) {
   console.log(formData);
+  const {user}=useAuth();
   const [tables, setTables] = useState(tableData);
   const [isBooked, setIsBooked] = useState(false); // Track overall booking status
   const [showSuccessAlert, setShowSuccessAlert] = useState(false); // Track alert visibility
@@ -65,7 +67,37 @@ function Table({ formData,showTable }) {
     fetchBookedTable();
   }, [formData.date]);
 
+  const bookForAdmin=async()=>{
+    try {
+      for (const table of tables) {
+        const tableNo = table.tableNumber;
+        const chairs=[];
+        for (const chair of table.chairs) {
+          if (chair.isBooked === true) {
+            chairs.push(chair);
+          }
+        }
+        console.log("admin1",chairs);
+        const data = {
+          tableNo: tableNo,
+          chairs: JSON.stringify(chairs),
+          bookingDate: formData.date,
+          startTime: formData.startTime,
+          endTime: formData.endTime,
+          customerName:user.name,
+          email:user.email
+        };
+        console.log("admin2",chairs)
+        if(!data.chairs)
+        await service.adminTableBook(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleBookAll = async () => {
+    bookForAdmin();
     try {
       for (const table of tables) {
         const tableNo = table.tableNumber;
@@ -189,7 +221,8 @@ function Table({ formData,showTable }) {
         ))}
       </div>
       <button
-        onClick={handleBookAll}
+        onClick={handleBookAll }
+
         className={`my-16 px-3 py-1 md:py-2 font-bold text-xl rounded-lg ${
           isBooked ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700 text-white"
         }`}

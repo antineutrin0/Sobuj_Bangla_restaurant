@@ -5,14 +5,15 @@ export class Service {
     client = new Client();
     databases;
     bucket;
-    
     constructor() {
         this.client
             .setEndpoint(conf.sobujbanglaURL)
             .setProject(conf.sobujbanglaProjectId);
         this.databases = new Databases(this.client);
          this.bucket = new Storage(this.client);
+        
     }
+    
 
     async  makereview({ name, gmail, profile,category,rating,review }) {
         try {
@@ -136,7 +137,7 @@ export class Service {
         }
     }
 
-    async placeOrder({customerName,customerEmail,orderItem,totalPrice}){
+    async placeOrder({customerName,customerEmail,orderItem,totalPrice,location,phone}){
         try {
             return await this.databases.createDocument(
                 conf.sobujbanglaDatabaseId,
@@ -146,6 +147,8 @@ export class Service {
                    customerEmail,
                    orderItem,
                    totalPrice,
+                   location,
+                   phone
                 }
             );
             
@@ -154,6 +157,33 @@ export class Service {
         }
   
     }
+
+    async updateOrderStatus(orderId, updateData) {
+        try {
+          await this.databases.updateDocument(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaOrderCollectionId,
+            orderId,
+            updateData
+        );
+        } catch (error) {
+          console.error("Error updating order status:", error);
+        }
+      }
+
+      async updateBookingStatus(orderId,updateData){
+         try {
+        await this.databases.updateDocument(
+          conf.sobujbanglaDatabaseId,
+          conf.sobujbanglaAdminTableDataCollectionId,
+          orderId,
+          updateData
+      );
+      } catch (error) {
+        console.error("Error updating order status:", error);
+      }
+    }
+      
    
     async deleteFromCard(itemId,email) {
             try {
@@ -215,7 +245,7 @@ export class Service {
                 }
 
                 
-      async  uploadProfile  (file)  {
+      async  uploadPhoto  (file)  {
         console.log(file);
             if (!file) return;
             try {
@@ -307,6 +337,47 @@ export class Service {
                 throw error; 
               }
         }
+
+async adminTableBook({tableNo,chairs,bookingDate,startTime,endTime,customerName,email}){
+    try {
+        return await this.databases.createDocument(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaAdminTableDataCollectionId,
+            ID.unique(), {
+               tableNo,
+               chairs,
+               bookingDate,
+               startTime,
+               endTime,
+               customerName,
+               email
+            }
+        );
+    } catch (error) {
+        
+    }
+}
+
+   async addFoodData({id,name,description,price,image})
+   {
+    try {
+        return await this.databases.createDocument(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaMenuCollectionId,
+            ID.unique(),
+            {
+                id,
+                name,
+                description,
+                image,
+                price
+            }
+        )
+        
+    } catch (error) {
+        console.log(error);
+    }
+   }
       
     // async getUserDetails(email) {
     //     try {

@@ -15,11 +15,12 @@ const Menu = () => {
 
   return (
    <div >
-    <div className=' border p-2 rounded-lg my-6 lg:my-8 w-full md:w-1/2 mx-auto '>
-        <p className='backdrop-blur-md text-amber-600 text-center text-2xl font-semibold py-2 '>Add Items To Cart</p>
+    <div className=' p-2 rounded-lg my-3 lg:my-4 w-full md:w-1/2 mx-auto '>
+        <p className='backdrop-blur-md  text-amber-600 text-center text-xl font-semibold py-2 '>Add Items To Cart</p>
       </div>
          
-     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 p-6 bg-stone-950">
+     <div className="h-screen overflow-y-auto">
+     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12 p-6 bg-stone-950">
          
          {foodData.map((food) => (
            <div
@@ -47,6 +48,7 @@ const Menu = () => {
            </div>
          ))}
        </div>
+     </div>
    </div>
   );
 };

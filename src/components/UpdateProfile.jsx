@@ -43,7 +43,7 @@ function UpdateProfile() {
     {
         console.log("new photo",profilePhoto);
         try {
-     const url=  await service.uploadProfile(profilePhoto);
+     const url=  await service.uploadPhoto(profilePhoto);
      try {
         console.log("second try")
         const response=await service.updateUserData({
@@ -143,7 +143,6 @@ function UpdateProfile() {
             />
           </div>
 
-         
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

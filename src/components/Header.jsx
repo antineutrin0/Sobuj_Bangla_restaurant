@@ -20,7 +20,7 @@ const Header = () => {
   };
   const dashboardbtn=()=>{
     if(user.prefs.role=="Admin"){
-        navigate('/admin')
+        navigate('/dashboard/admin')
     }
     if(user.prefs.role=="Waiter"){
         navigate('/waiter')
