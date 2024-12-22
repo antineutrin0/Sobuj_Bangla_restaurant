@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import service from '../appwrite/databaseConfig';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import conf from '../conf/conf';
 
 function AddFood() {
   const [id, setId] = useState('');
@@ -9,6 +10,24 @@ function AddFood() {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
+  const {itemId}=useParams();
+
+ useEffect(()=>{
+    const fetchitem=async()=>{
+        try {
+           const response=await service.getsingledocument(itemId,conf.sobujbanglaMenuCollectionId);
+           setId(response.id)
+           setName(response.name)
+          setDescription(response.description)
+          setPrice(response.price)
+          setImage(response.image)            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    if(itemId)
+        fetchitem();
+ },[])
 
   const handleImageUpload = (event) => {
     event.preventDefault();
@@ -17,6 +36,25 @@ function AddFood() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = {
+        id:parseInt(id),
+        name, 
+        description,
+        image,
+        price:parseFloat(price)
+      };
+
+    if(itemId){
+
+        try {
+            console.log("update",formData);
+            await service.updateFoodData(formData,itemId)
+            navigate('/dashboard/admin/foodmenu')
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     try {
       let imageUrl = '';
@@ -26,15 +64,6 @@ function AddFood() {
         imageUrl = await service.uploadPhoto(image);
         console.log('Image uploaded successfully:', imageUrl);
       }
-
-      const formData = {
-        id:parseInt(id),
-        name,
-        description,
-        image: imageUrl,
-        price:parseFloat(price)
-      };
-
       console.log('Submitting food data:', formData);
       await service.addFoodData(formData);
       console.log('Food added successfully');
@@ -94,7 +123,8 @@ function AddFood() {
             />
           </div>
 
-          <div>
+          {
+            !itemId&&<div>
             <label className="block text-sm font-medium text-gray-100 mb-2">Upload Food Image</label>
             <input
               type="file"
@@ -103,6 +133,7 @@ function AddFood() {
               className="block w-full text-sm text-gray-100 border border-gray-100 rounded-lg cursor-pointer bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
+        }
 
           <button
             type="submit"

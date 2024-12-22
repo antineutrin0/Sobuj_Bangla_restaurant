@@ -3,10 +3,10 @@ import service from "../appwrite/databaseConfig";
 import { useAuth } from "../appwrite/AuthConfig";
 import conf from "../conf/conf";
 
-const generateLast7Days = () => {
+const generateNext7Days = () => {
   const dates = [];
   const now = new Date();
-  for (let i = -6; i <= 0; i++) {
+  for (let i = 0; i <= 7; i++) {
     const pastDate = new Date();
     pastDate.setDate(now.getDate() + i);
     dates.push(pastDate.toISOString().split("T")[0]);
@@ -17,25 +17,30 @@ const generateLast7Days = () => {
 function AdminTableHistory() {
   const [bookings, setBookings] = useState([]);
   const { user } = useAuth();
-  const last7Days = generateLast7Days();
+  const next7Days = generateNext7Days();
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const data = await service.getAllCollectionData(conf.sobujbanglaAdminTableDataCollectionId);
         console.log("Admin table bookings:", data);
-        console.log("Last 7 days:", last7Days);
-
-        setBookings(data); // Assuming data is an array of bookings
+        console.log("Last 7 days:", next7Days);
+  
+        const next7DaysData = data.filter(book => 
+          next7Days.includes(book.bookingDate)
+        );
+  
+        setBookings(next7DaysData); 
       } catch (error) {
         console.error("Error fetching table bookings:", error);
       }
     };
-
+  
     if (user) {
       fetchBookings();
     }
   }, [user]);
+  
 
   const handleCheck = async (bookingId, index) => {
     try {
@@ -74,7 +79,7 @@ function AdminTableHistory() {
                       onClick={() => handleCheck(booking.$id, index)}
                       className="px-4 py-2 bg-amber-600 text-white text-lg font-semibold rounded-md hover:bg-amber-700"
                     >
-                      New
+                      Check Out
                     </button>
                   )}
                 </div>

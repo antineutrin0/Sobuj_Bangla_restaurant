@@ -29,11 +29,15 @@ const AdminDashboard = () => {
         </button>
       </div>
 
+      <div className='w-full md:flex'>
       <div
           className={`w-4/5 absolute top-10 md:top-0 rounded-lg z-10 md:static md:w-1/3  ${toggle ? "block" : "hidden"} md:block`}
         > <AdminSidebar toggleSidebar={toggleSidebar}/>
         </div>
+      <div className='w-full md:w-2/3 mx-4 md:mx-8'>
       <Outlet></Outlet>
+      </div>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,9 @@
 import React from 'react';
-import foodData from './foodData.json';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../appwrite/AuthConfig';
 
 const ItemCarosel = () => {
-  const {user}=useAuth();
+  const {user,foodData}=useAuth();
   const navigate=useNavigate();
   return (
     <div className='flex flex-col md:flex-row items-center justify-between'>
@@ -33,7 +32,7 @@ const ItemCarosel = () => {
       <p className=" text-lg hidden md:block font-thin mt-2 rounded-lg p-2">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
       </div>
       <div>
-        <button className='text-xl bg-green-500 rounded-lg p-2  text-black font-semibold hover:bg-green-600'
+        <button className={`text-xl bg-green-500 rounded-lg p-2  text-black font-semibold hover:bg-green-600 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}
         onClick={()=>{
           if(user)
           navigate('/dashboard/customer/orderfood')

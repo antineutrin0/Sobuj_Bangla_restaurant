@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import service from "../appwrite/databaseConfig";
-import foodData from "./foodData.json";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../appwrite/AuthConfig";
 
 const MyCard = () => {
-  const { user } = useAuth();
+  const { user,foodData } = useAuth();
   const [cardData, setCardData] = useState([]);
   const [foodItem, setFoodItem] = useState([]);
   const [triger, setTriger] = useState(false);

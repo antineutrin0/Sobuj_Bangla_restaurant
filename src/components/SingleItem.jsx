@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import items from './foodData.json';
 import service from '../appwrite/databaseConfig';
 import { useAuth } from '../appwrite/AuthConfig';
+import conf from '../conf/conf';
 
 
 function SingleItem() {
-  const {user}=useAuth();
+  const {user,foodData}=useAuth();
   const { id } = useParams();
   const [singleitem, setsingleitem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false); 
   const navigate=useNavigate();
+
+
   const handleAddToOrder = () => {
     if(!user){
       navigate('/signin');
@@ -37,7 +39,8 @@ function SingleItem() {
   };
 
   useEffect(() => {
-    const foundItem = items.find(item => item.id == id);
+    console.log("checking",foodData);
+    const foundItem = foodData.find(item => item.id == id);
     setsingleitem(foundItem);
   }, [id]);
 

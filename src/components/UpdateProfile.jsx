@@ -93,7 +93,7 @@ function UpdateProfile() {
   };
 
   return (
-    <div className="flex items-center justify-center h-full bg-stone-900">
+    <div className="flex items-center mx-auto justify-center h-full bg-stone-900">
       <div className="w-full max-w-lg text-gray-100 p-8 bg-stone-800 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">Update Profile</h2>
         <form onSubmit={handleSubmit} className="space-y-6">

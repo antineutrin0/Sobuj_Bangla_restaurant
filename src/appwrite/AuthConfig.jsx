@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Account, Client, ID } from "appwrite";
 import conf from '../conf/conf.js';
+import service from "./databaseConfig.js";
 
 
 const client = new Client();
@@ -66,6 +67,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [foodData,setfoodData]=useState([]);
 
     const authService = new AuthService();
 
@@ -114,8 +116,22 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    useEffect(()=>{
+        const fetchitems=async()=>{
+          try {
+            console.log("from auth")
+            const response=await service.getAllCollectionData(conf.sobujbanglaMenuCollectionId);
+            console.log(response)
+            setfoodData(response);
+          } catch (error) {
+            console.log("from auth",error)
+          }
+        }
+        fetchitems();
+      },[])
+
     return (
-        <AuthContext.Provider value={{ user, loading, createAccount, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, createAccount, login, logout,foodData }}>
             {!loading && children}
         </AuthContext.Provider>
     );

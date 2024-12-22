@@ -10,6 +10,8 @@ const conf={
     sobujbanglaTableCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_TABLE_COLLECTION_ID),
     sobujbanglaReviewCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_REVIEW_COLLECTION_ID),
     sobujbanglaUserCardCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_USER_CARD_COLLECTION_ID),
-    sobujbanglaAdminTableDataCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_ADMIN_TABLE_DATA_COLLECTION_ID)
+    sobujbanglaAdminTableDataCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_ADMIN_TABLE_DATA_COLLECTION_ID),
+    sobujbanglaDashboardDataCollectionId:String(import.meta.env.VITE_SOBUJ_BANGLA_DASHBOARD_DATA_COLLECTION_ID),
+    sobujbanglaTotalPriceId:String(import.meta.env.VITE_SOBUJ_BANGLA_TOTALPRICE_ID)
  }
  export default conf

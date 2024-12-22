@@ -8,6 +8,22 @@ import conf from '../conf/conf'
 
 function AdminOutlet() {
     const [usercount,setusercount]=useState();
+    const [income,setincome]=useState();
+    const [orders,setorders]=useState();
+
+    useEffect(()=>{
+        const fetchdashboarddata=async()=>{
+            try {
+                const response=await service.getsingledocument(conf.sobujbanglaTotalPriceId,conf.sobujbanglaDashboardDataCollectionId)
+                setincome(response.totalIncome);
+                setorders(response.totalOrder);
+            } catch (error) {
+                
+            }
+        }
+        fetchdashboarddata();
+    },[])
+
     useEffect(()=>{
         const fetchuser=async()=>{
             try {
@@ -22,34 +38,41 @@ function AdminOutlet() {
 
   return (
     <div 
-    className="flex flex-col items-center justify-center w-full mx-4 md:mx-10"
+    className="flex flex-col items-center justify-center w-full bg-stone-800"
   >
-    <h1 className="text-2xl font-bold my-5">Sobuj Bangla Dashboard</h1>
-    <div className="flex flex-col md:flex-row justify-between w-full space-y-4 md:space-y-0 md:space-x-10">
-      <div className="bg-white w-full shadow-md p-4 rounded-lg flex justify-between items-center">
-        <div>
-          <h4 className="text-gray-600 text-lg font-semibold">Users</h4>
+    <div className="text-white text-xl font-bold rounded-xl p-2 my-8 roboto-text flex flex-row  justify-between ">
+   <span className="relative left-5 text-black  bg-red-600 px-3 py-1 rounded-r-3xl rounded-l-lg">
+      SOBUJ BANGLA
+    </span>
+    <span className="bg-green-600 text-gray-100 pl-6 pr-2 py-1 rounded-lg">
+      Dashboard
+    </span>
+  </div>
+
+    <div className="flex flex-col mb-10 md:flex-row justify-between w-full space-y-4 md:space-y-0 md:space-x-10">
+      <div className="bg-stone-900 w-full shadow-md p-4 rounded-lg flex justify-between items-center">
+        <div className='ml-4 md:ml-0'>
+          <h4 className="text-gray-100 text-lg font-semibold">Users</h4>
           <p className="text-xl font-bold">+{usercount}</p>
         </div>
-        <FaUsers className="text-blue-500 text-3xl" />
+        <FaUsers className="text-blue-500 text-3xl mr-4 md:mr-0" />
       </div>
-      <div className="bg-white w-full shadow-md p-4 rounded-lg flex justify-between items-center">
-        <div>
-          <h4 className="text-gray-600 text-lg font-semibold">Income</h4>
-          <p className="text-xl font-bold">$2,873.88</p>
+      <div className="bg-stone-900 w-full shadow-md p-4 rounded-lg flex justify-between items-center">
+        <div className='ml-4 md:ml-0'>
+          <h4 className="text-gray-100 text-lg font-semibold">Income</h4>
+          <p className="text-xl font-bold">${income}</p>
         </div>
-        <FaDollarSign className="text-green-500 text-3xl" />
+        <FaDollarSign className="text-green-500 text-3xl mr-4 md:mr-0" />
       </div>
-      <div className="bg-white w-full shadow-md p-4 rounded-lg flex justify-between items-center">
-        <div>
-          <h4 className="text-gray-600 text-lg font-semibold">Orders</h4>
-          <p className="text-xl font-bold">+79</p>
+      <div className="bg-stone-900 w-full shadow-md p-4 rounded-lg flex justify-between items-center">
+        <div className='ml-4 md:ml-0'>
+          <h4 className="text-gray-100 text-lg font-semibold">Orders</h4>
+          <p className="text-xl font-bold">+{orders}</p>
         </div>
-        <FaFileInvoice className="text-yellow-500 text-3xl" />
+        <FaFileInvoice className="text-yellow-500 text-3xl mr-4 md:mr-0" />
       </div>
     </div>
 
-    <h2 className="text-2xl font-bold mt-10 mb-5">Last 24h Incomes</h2>
     <div className="bg-stone-700 w-full shadow-md rounded-lg">
       <SalesChart />
     </div>

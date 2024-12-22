@@ -40,6 +40,8 @@ function OrderedFood() {
         sum();
     }, [orderDetail]);
 
+    
+
     async function placeorder() {
         const formErrors = {};
 
@@ -55,6 +57,12 @@ function OrderedFood() {
 
         if (Object.keys(formErrors).length > 0) {
             return;
+        }
+
+        try {
+            await service.updateTotalIncome(totalprice);
+        } catch (error) {
+            console.log(error);
         }
 
         try {
@@ -192,7 +200,7 @@ function OrderedFood() {
                 <input
                     id="location"
                     type="text"
-                    className="w-full px-4 py-2 text-black rounded-lg"
+                    className="w-full px-4 py-2 text-gray-100 rounded-lg"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                 />
@@ -206,7 +214,7 @@ function OrderedFood() {
                 <input
                     id="phone"
                     type="text"
-                    className="w-full px-4 py-2 text-black rounded-lg"
+                    className="w-full px-4 py-2 text-gray-100 rounded-lg"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                 />

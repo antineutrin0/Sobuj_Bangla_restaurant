@@ -7,14 +7,17 @@ import service from "../appwrite/databaseConfig";
 import { TbBrandBooking, TbMenuOrder } from "react-icons/tb";
 import { BiFoodMenu } from "react-icons/bi";
 import { MdOutlinePostAdd } from "react-icons/md";
+import { GiUpgrade } from "react-icons/gi";
 
 const AdminSidebar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [userData, setUserData] = useState([]);
   const [clickLogout, setClickLogout] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await service.getUserData(user.email);
@@ -36,10 +39,9 @@ const AdminSidebar = ({ toggleSidebar }) => {
   };
 
   return (
-    <div className="bg-gray-900 text-white w-4/5 md:w-full h-full p-5 flex flex-col rounded-lg">
+    <div className="bg-gray-900 text-white w-4/5 md:w-full p-5 flex flex-col rounded-lg">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-        <p className="text-sm text-gray-400">Welcome back,</p>
+        <h1 className="text-2xl text-center my-4 mb-8 font-bold">Admin Dashboard</h1>
         <div className="flex items-center mt-4">
           <img
             src={
@@ -48,23 +50,46 @@ const AdminSidebar = ({ toggleSidebar }) => {
                 : "https://via.placeholder.com/40"
             }
             alt="Profile"
-            className="rounded-full w-10 h-10"
+            className="rounded-full w-20 h-20"
           />
           <div className="ml-3">
             <h2 className="text-sm font-semibold">{user.name}</h2>
             <p className="text-xs text-gray-400">
-              {userData.length > 0 ? userData[0].role || "Admin" : "Admin"}
+              Admin
             </p>
+            <button
+              onClick={() => setShowDetails((prev) => !prev)}
+              className="mt-2 text-blue-500 text-sm underline focus:outline-none"
+            >
+              {showDetails ? "Hide Details" : "See Details"}
+            </button>
           </div>
         </div>
+        {showDetails && userData.length > 0 && (
+          <div className="mt-4 p-4 bg-gray-800 rounded-lg shadow-lg">
+            <p className="text-sm">
+              <strong>Email:</strong> {userData[0].email}
+            </p>
+            <p className="text-sm">
+              <strong>Phone:</strong> {userData[0].phone || "N/A"}
+            </p>
+            <p className="text-sm">
+              <strong>About:</strong> {userData[0].about || "N/A"}
+            </p>
+            <p className="text-sm">
+              <strong>Address:</strong> {userData[0].address || "N/A"}
+            </p>
+          </div>
+        )}
       </div>
 
       <ul className="space-y-4">
+        {/* Sidebar Menu Items */}
         <li>
           <button
             onClick={() => {
               toggleSidebar();
-              navigate('');
+              navigate("");
             }}
             className="flex items-center p-2 w-full text-lg font-semibold hover:bg-gray-700 rounded"
           >
@@ -130,6 +155,18 @@ const AdminSidebar = ({ toggleSidebar }) => {
           >
             <FaFileInvoiceDollar className="mr-3" />
             Order History
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => {
+              toggleSidebar();
+              navigate("updateprofile");
+            }}
+            className="flex items-center p-2 w-full text-lg font-semibold hover:bg-gray-700 rounded"
+          >
+            <GiUpgrade className="mr-3" />
+            Update Profile
           </button>
         </li>
         <li>

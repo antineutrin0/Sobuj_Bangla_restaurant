@@ -1,0 +1,82 @@
+[
+  {
+    "question": "What are your restaurant's opening hours?",
+    "answer": "We are open from 9:00 AM to 11:00 PM every day."
+  },
+  {
+    "question": "Do you offer home delivery services?",
+    "answer": "Yes, we offer home delivery within a 5km radius."
+  },
+  {
+    "question": "Can I book a table in advance?",
+    "answer": "Yes, you can book a table through our website or by calling us."
+  },
+  {
+    "question": "Do you have vegetarian options on your menu?",
+    "answer": "Yes, we offer a variety of vegetarian dishes."
+  },
+  {
+    "question": "Are pets allowed in your restaurant?",
+    "answer": "Pets are welcome in our outdoor seating area."
+  },
+  {
+    "question": "Do you host events or parties?",
+    "answer": "Yes, we host events and private parties. Contact us for more details."
+  },
+  {
+    "question": "Is parking available near your restaurant?",
+    "answer": "Yes, we have a dedicated parking area for customers."
+  },
+  {
+    "question": "Do you accommodate dietary restrictions or allergies?",
+    "answer": "Absolutely! Please let us know in advance, and we will customize your meal."
+  },
+  {
+    "question": "What payment methods do you accept?",
+    "answer": "We accept cash, credit/debit cards, and mobile payment options like bKash."
+  },
+  {
+    "question": "Do you have a kids' menu?",
+    "answer": "Yes, we have a special menu designed for children."
+  },
+  {
+    "question": "Do you offer any discounts or loyalty programs?",
+    "answer": "We offer discounts during special occasions and a loyalty program for regular customers."
+  },
+  {
+    "question": "Can I cancel my table reservation?",
+    "answer": "Yes, you can cancel your reservation up to 24 hours before the scheduled time."
+  },
+  {
+    "question": "Are there gluten-free options on your menu?",
+    "answer": "Yes, we offer a selection of gluten-free dishes."
+  },
+  {
+    "question": "Can I order food online from your restaurant?",
+    "answer": "Yes, you can place your order through our website or mobile app."
+  },
+  {
+    "question": "What is your refund policy for canceled events?",
+    "answer": "We provide a full refund for cancellations made at least 48 hours before the event."
+  },
+  {
+    "question": "Is your restaurant wheelchair accessible?",
+    "answer": "Yes, our restaurant is fully wheelchair accessible."
+  },
+  {
+    "question": "Do you provide catering services?",
+    "answer": "Yes, we offer catering services for all types of events."
+  },
+  {
+    "question": "What cuisines are available at your restaurant?",
+    "answer": "We specialize in Bangladeshi, Indian, and Continental cuisines."
+  },
+  {
+    "question": "Do you offer special meals during Ramadan?",
+    "answer": "Yes, we have a special Iftar and Sehri menu during Ramadan."
+  },
+  {
+    "question": "Can I request a specific table location while booking?",
+    "answer": "Yes, you can request a specific table location while booking, subject to availability."
+  }
+]

@@ -211,6 +211,19 @@ export class Service {
             }
         }
 
+        async deleteFromCollection(documentid,collectionId){
+            try {
+                await this.databases.deleteDocument(
+                    conf.sobujbanglaDatabaseId,
+                    collectionId,
+                    documentid 
+                   )
+                return true;
+               } catch (error) {
+                console.log(error);
+               }
+        }
+
         async getMyCardData(email) {
                 try {
                   const response = await this.databases.listDocuments(
@@ -378,97 +391,69 @@ async adminTableBook({tableNo,chairs,bookingDate,startTime,endTime,customerName,
         console.log(error);
     }
    }
+
+   async updateFoodData({id,name,description,price,image},documentid){
+    try {
+        return await this.databases.updateDocument(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaMenuCollectionId,
+            documentid,
+            {
+                id,
+                name,
+                description,
+                price,
+                image
+            }
+        )
+        
+    } catch (error) {
+        console.log(error);
+    }
+   }
+
+   async getsingledocument(documentid,collectionId){
+    try {
+
+        const response=await this.databases.getDocument(
+            conf.sobujbanglaDatabaseId,
+            collectionId,
+            documentid
+        )
+        console.log(response);
+        return response;
+        
+    } catch (error) {
+        console.log(error);
+    }
+   }
+
+   async updateTotalIncome(totalprice){
+    try {
+
+        const response=await this.databases.getDocument(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaDashboardDataCollectionId,
+            conf.sobujbanglaTotalPriceId
+        )
+        const totalIncome=totalprice+response.totalIncome;
+        const totalOrder=response.totalOrder+1;
+        await this.databases.updateDocument(
+            conf.sobujbanglaDatabaseId,
+            conf.sobujbanglaDashboardDataCollectionId,
+            conf.sobujbanglaTotalPriceId,
+            {
+                totalIncome,
+                totalOrder
+            }
+        )
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+   }
       
-    // async getUserDetails(email) {
-    //     try {
-    //       // Make a request to fetch the document by email
-    //       const response = await this.databases.listDocuments(
-    //         conf.subletshebaDatabaseId,
-    //         conf.subletshebaUserDetailId,
-    //         [Query.equal('email', email)]
-    //       );
-          
-    //       // Handle the response
-    //       console.log('Fetched Document:', response);
-          
-    //       if (response.total > 0) {
-    //         return response.documents[0]; // Return the first matching document
-    //       } else {
-    //         throw new Error('No document found');
-    //       }
-    //     } catch (error) {
-    //       console.error('Error fetching document:', error);
-    //       throw error; // Handle or rethrow the error as needed
-    //     }
-    // }
-
-    // async getSinglePost(documentid) {
-    //     console.log(documentid);
-    //     try {
-    //       // Make a request to fetch the document by email
-    //       const response = await this.databases.getDocument(
-    //         conf.subletshebaDatabaseId,
-    //         conf.subletshebaCollectionId,
-    //         documentid,
-    //       );
-    //       // Handle the response
-    //       console.log('Fetched Document:', response);
-          
-    //      return response; // Return the first matching document
-    //     } catch (error) {
-    //       console.error('Error fetching document:', error);
-    //       throw error; // Handle or rethrow the error as needed
-    //     }
-    // }
-
-  
-    // async getAllPosts() {
-    //     try {
-    //       // Make a request to fetch the document by email
-    //       const response = await this.databases.listDocuments(
-    //         conf.subletshebaDatabaseId,
-    //         conf.subletshebaCollectionId
-    //       );
-    //       // Handle the response
-    //       console.log('Fetched Document:', response);
-          
-    //      return response.documents; // Return the first matching document
-    //     } catch (error) {
-    //       console.error('Error fetching document:', error);
-    //       throw error; // Handle or rethrow the error as needed
-    //     }
-    // }
-
-   
-    // async updatePost({ title, details }) {
-    //     try {
-    //         return await this.databases.updateDocument(
-    //             conf.subletshebaDatabaseId,
-    //             conf.subletshebaCollectionId,
-    //             ID.unique(), {
-    //                 title,
-    //                 details
-    //             }
-    //         );
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
-
-    // async deletePost(documentid) {
-    //     try {
-    //         console.log(documentid);
-    //         await this.databases.deleteDocument(
-    //             conf.subletshebaDatabaseId,
-    //             conf.subletshebaCollectionId,
-    //             documentid
-    //         );
-    //         return true;
-    //     } catch (error) {
-    //         throw error;
-    //         return false;
-    //     }
-    // }
 }
 
 const service = new Service();

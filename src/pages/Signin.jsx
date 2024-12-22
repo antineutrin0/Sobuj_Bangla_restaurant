@@ -26,7 +26,7 @@ function Signin() {
     try {
       const result = await login(formData);
       console.log('Login successful:', result);
-      navigate('/dashboard/customer/orderfood')
+      navigate('/')
     } catch (error) {
       console.error('Login failed:', error.message);
       setError('Invalid email or password.'); 

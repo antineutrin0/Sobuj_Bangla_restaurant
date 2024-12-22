@@ -11,6 +11,7 @@ const Customersideber = ({toggleSidebar}) => {
   const navigate = useNavigate();
    const {user,logout}=useAuth();
    const [clicklogout,setclicklogout]=useState(false);
+   const [showDetails, setShowDetails] = useState(false);
    const [userData,setuserData]=useState([]);
   const handleLogout =  () => {
     setclicklogout(!clicklogout);
@@ -40,39 +41,46 @@ const Customersideber = ({toggleSidebar}) => {
   };
 
   return (
-    <div className="w-full bg-stone-800 flex flex-col justify-start items-center">
+    <div className="w-full bg-stone-900 flex flex-col justify-start items-center">
       
-      <div className="flex flex-col justify-center items-center  bg-cyan-700 w-full h-1/3 p-4  rounded-xl">
-        <div className="flex justify-center items-center">
-        <img
-            className="object-cover h-40 w-40 rounded-full"
+      <div className="mb-8">
+        <h1 className="text-2xl text-center my-4 mb-8 font-bold">Customer Dashboard</h1>
+        <div className="flex items-center mt-4">
+          <img
             src={
               userData.length > 0
                 ? userData[0].photo_URL
-                : "https://i.ibb.co.com/VLttntY/c04b017b6b9d1c189e15e6559aeb3ca8.png"
+                : "https://via.placeholder.com/40"
             }
-            alt="User Profile"
+            alt="Profile"
+            className="rounded-full w-20 h-20"
           />
-        </div>
-         <div >
-         <div className="h-full w-full flex flex-col justify-center items-start ">
-            <h1 className="text-white text-xl font-bold my-2 mx-auto ">{user.name}</h1>
-            <p className="text-white text-lg font-semibold  ">Email:<span className="text-lg font-normal"> {user.email}</span></p>
+          <div className="ml-3">
+            <h2 className="text-lg font-semibold">{user.name}</h2>
+            <button
+              onClick={() => setShowDetails((prev) => !prev)}
+              className="mt-2 text-blue-500 text-sm underline focus:outline-none"
+            >
+              {showDetails ? "Hide Details" : "See Details"}
+            </button>
           </div>
-          {userData.length > 0 && (
-        <div className="w-full flex flex-col items-start pb-4  ">
-          <p className="text-white text-sm ">
-            <span className="text-lg font-semibold  ">Phone:</span> {userData[0].phone || "N/A"}
-          </p>
-          <p className="text-white text-sm ">
-            <span className="text-lg font-semibold">Address:</span> {userData[0].address || "N/A"}
-          </p>
-          <p className="text-white text-sm ">
-            <span className="text-lg font-semibold">About:</span> {userData[0].about || "N/A"}
-          </p>
         </div>
-      )}
-         </div>
+        {showDetails && userData.length > 0 && (
+          <div className="mt-4 p-4 bg-gray-800 rounded-lg shadow-lg">
+            <p className="text-sm">
+              <strong>Email:</strong> {userData[0].email}
+            </p>
+            <p className="text-sm">
+              <strong>Phone:</strong> {userData[0].phone || "N/A"}
+            </p>
+            <p className="text-sm">
+              <strong>About:</strong> {userData[0].about || "N/A"}
+            </p>
+            <p className="text-sm">
+              <strong>Address:</strong> {userData[0].address || "N/A"}
+            </p>
+          </div>
+        )}
       </div>
 
       <aside className="w-full" aria-label="Sidebar">

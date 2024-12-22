@@ -2,14 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../appwrite/AuthConfig";
-import foodData from './foodData.json';
 import { ImSearch } from "react-icons/im";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const {user}=useAuth();
+  const {user,foodData}=useAuth();
 
   const handleSearch = () => {
     foodData.map(item=>{
@@ -68,7 +67,7 @@ const Header = () => {
               setIsMenuOpen(false);
               navigate("/menu");
             }}
-            className="text-white text-lg  md:text-xl hover:underline"
+            className={`text-white text-lg  md:text-xl hover:underline ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}
           >
             Menu
           </button>
@@ -80,7 +79,7 @@ const Header = () => {
             else
             navigate('/signin');
             }}
-            className="text-white text-lg md:text-xl hover:underline"
+            className= {`text-white text-lg md:text-xl hover:underline ${(user&&user.prefs.role)=="Admin"? "hidden": "block"}`}
           >
             Book Now
           </button>
@@ -89,7 +88,7 @@ const Header = () => {
               setIsMenuOpen(false);
               navigate("/contact");
             }}
-            className="text-white text-lg md:text-xl hover:underline"
+            className= {`text-white text-lg md:text-xl hover:underline ${(user&&user.prefs.role)=="Admin"? "hidden": "block"}`}
           >
             Contact
           </button >
@@ -146,7 +145,7 @@ const Header = () => {
 
       <div className="flex flex-col justify-center items-center md:items-start  h-full text-center text-white p-8">
         <div className=" backdrop-blur-lg p-2 lg:p-16 rounded-lg">
-        <div className=" flex items-center bg-green-600 border-white border-2  mt-4 mb-8 rounded-full mx-auto flex-1 w-full lg:w-4/5">
+        <div className={`flex items-center bg-green-600 border-white border-2  mt-4 mb-8 rounded-full mx-auto flex-1 w-full lg:w-4/5 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}>
         <select
     className="bg-transparent text-xl text-gray-900 font-semibold px-2 outline-none w-full"
     value={searchQuery}
@@ -174,7 +173,7 @@ const Header = () => {
         <p className="hidden lg:block text-lg font-thin mt-2 rounded-lg p-2">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
         </div>
       <div className="mt-4 lg:-mt-12 lg:mb-24 z-10 flex mx-auto md:mx-0 ">
-         <button className=" text-center ml-28  md:ml-80 text-xl md:text-3xl text-black font-bold bg-amber-600 p-4 md:p-5 rounded-2xl hover:bg-amber-700"
+         <button className={ `text-center ml-28  md:ml-80 text-xl md:text-3xl text-black font-bold bg-amber-600 p-4 md:p-5 rounded-2xl hover:bg-amber-700 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"} `}
          onClick={()=>{
           if(user)
             navigate('/dashboard/customer/booktable')

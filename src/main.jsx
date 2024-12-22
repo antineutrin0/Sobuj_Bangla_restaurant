@@ -140,6 +140,10 @@ function Root() {
                   element:<Menu></Menu>
                 },
                 {
+                  path:'foodmenu/:itemId',
+                  element:<AddFood></AddFood>
+                },
+                {
                   path:'tablebooking',
                   element:<AdminTableHistory></AdminTableHistory>
                 },
@@ -150,6 +154,10 @@ function Root() {
                 {
                   path:'additem',
                   element:<AddFood></AddFood>
+                },
+                {
+                  path:'updateprofile',
+                  element:<UpdateProfile></UpdateProfile>
                 }
               ]
             }

@@ -3,10 +3,9 @@ import { FaRegUser, FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import service from '../appwrite/databaseConfig';
 import { useAuth } from '../appwrite/AuthConfig';
-import foodData from './foodData.json';
 
 function FoodReviewForm() {
-  const { user } = useAuth();
+  const { user,foodData } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

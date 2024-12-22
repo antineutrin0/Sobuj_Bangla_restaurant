@@ -79,7 +79,7 @@ const Review = () => {
         </h2>
         <div className="flex mx-auto md:mx-0">
           <button
-            className="text-center mt-8 text-lg md:text-xl hover:text-black font-bold bg-stone-950 p-4 px-8 rounded-lg border border-amber-600 text-white hover:bg-amber-600"
+            className={`text-center mt-8 text-lg md:text-xl hover:text-black font-bold bg-stone-950 p-4 px-8 rounded-lg border border-amber-600 text-white hover:bg-amber-600 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}
             onClick={() => {
               if (user) navigate("/review");
               else navigate("/signin");

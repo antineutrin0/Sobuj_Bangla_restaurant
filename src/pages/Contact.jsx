@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { MdLocationOn } from "react-icons/md";
+import faqData from '../components/faqData.json'
 import { FaPhone } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [formError, setFormError] = useState("");  // New state for error message
+    const [formError, setFormError] = useState("");
+    const [expandedQuestionIndex, setExpandedQuestionIndex] = useState(null); // State for FAQ
     const navigate = useNavigate();
+
+    const handleToggleFAQ = (index) => {
+        setExpandedQuestionIndex(expandedQuestionIndex === index ? null : index);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,16 +21,15 @@ const Contact = () => {
         const message = e.target['message'].value.trim();
 
         if (!fullName || !message) {
-            // If any field is empty, set an error message
             setFormError("Full Name and Message are required.");
             return;
         }
 
-        setFormError(""); // Clear any previous error message
+        setFormError("");
         setShowSuccessAlert(true);
         try {
             setTimeout(() => {
-                navigate('/'); 
+                navigate('/');
             }, 2000);
         } catch (error) {
             console.log(error);
@@ -84,6 +89,28 @@ const Contact = () => {
                     </div>
                 </div>
 
+                {/* FAQ Section */}
+                <div className="bg-stone-950 text-gray-50 rounded-lg shadow-lg p-6 mb-10 max-h-80 overflow-y-auto">
+                    <h2 className="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+                    {faqData.map((faq, index) => (
+                        <div key={index} className="mb-4">
+                            <button
+                                className="w-full text-left font-semibold text-gray-200 hover:text-white"
+                                onClick={() => handleToggleFAQ(index)}
+                            >
+                                {faq.question}
+                            </button>
+                            {expandedQuestionIndex === index && (
+                                <div className="mt-2 text-gray-300">
+                                    {faq.answer}
+                                </div>
+                            )}
+                            <hr className="mt-2 border-gray-700" />
+                        </div>
+                    ))}
+                </div>
+
+                {/* Contact Form */}
                 <div className="bg-stone-950 text-gray-50 rounded-lg shadow-lg p-6">
                     <form onSubmit={handleSubmit}>
                         <div className="flex flex-col sm:flex-row justify-start items-center mb-5">
@@ -100,7 +127,6 @@ const Contact = () => {
                             />
                         </div>
 
-                        {/* Subject */}
                         <div className="mb-5">
                             <label 
                                 htmlFor="subject" 
@@ -115,7 +141,6 @@ const Contact = () => {
                             />
                         </div>
 
-                        {/* Message */}
                         <div className="mb-5">
                             <label 
                                 htmlFor="message" 
@@ -130,10 +155,8 @@ const Contact = () => {
                             />
                         </div>
 
-                        {/* Error Message */}
                         {formError && <p className="text-red-500 text-center mb-4">{formError}</p>}
 
-                        {/* Submit Button */}
                         <div className="text-center">
                             <button 
                                 type="submit" 

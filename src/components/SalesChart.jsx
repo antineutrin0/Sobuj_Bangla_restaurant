@@ -50,52 +50,106 @@ function SalesChart() {
   }, [salesData]);
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center h-full w-full mx-auto space-y-4 md:space-x-10 rounded-lg bg-stone-800">
-        <div className='w-full flex flex-col items-center justify-center bg-gray-300 rounded-xl '>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart
-            data={salesChartData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date"
-            label={{ value: 'Dates', angle: 0,  position: 'insideBottom', offset: -5 }}
-            />
-            <YAxis label={{ value: 'Sales Value (USD)', angle: -90, position: 'insideLeft' }} />
-            <Tooltip />
-            
-            <Bar dataKey="value" fill="#8884d8" activeBar={<Rectangle fill="gray" stroke="blue" />} />
-          </BarChart>
-        </ResponsiveContainer>
-        <div className='text-xl my-6 font-bold text-gray-800'>
+    <div className="flex flex-col md:flex-row justify-center items-center h-full w-full mx-auto space-y-4 md:space-y-0 md:space-x-10 rounded-lg bg-stone-800">
+        <div className='w-full flex flex-col items-center justify-center bg-stone-800 rounded-xl '>
+
+<ResponsiveContainer width="100%" height={300} className="bg-stone-800">
+  <BarChart
+    data={salesChartData}
+    margin={{
+      top: 5,
+      right: 30,
+      left: 20,
+      bottom: 5,
+    }}
+    style={{ backgroundColor: '#292524' }} // stone-800 equivalent
+  >
+    <CartesianGrid strokeDasharray="3 3" stroke="#4B5563" /> {/* Stone-500 for grid */}
+    <XAxis 
+      dataKey="date"
+      label={{
+        value: 'Dates',
+        angle: 0,
+        position: 'insideBottom',
+        offset: -5,
+        fill: '#FFFFFF', // White text
+      }}
+      tick={{ fill: '#FFFFFF' }} // White ticks
+    />
+    <YAxis 
+      label={{
+        value: 'Sales Value (USD)',
+        angle: -90,
+        position: 'insideLeft',
+        fill: '#FFFFFF', // White text
+      }}
+      tick={{ fill: '#FFFFFF' }} // White ticks
+    />
+    <Tooltip 
+      contentStyle={{
+        backgroundColor: '#1F2937', // Slate-800 equivalent
+        color: '#FFFFFF', // White text
+      }}
+      itemStyle={{ color: '#FFFFFF' }} // White text
+    />
+    <Bar dataKey="value" fill="#8884d8" activeBar={<Rectangle fill="gray" stroke="blue" />} />
+  </BarChart>
+</ResponsiveContainer>
+
+        <div className='text-xl my-6 font-bold text-gray-100'>
           Sales in Last 7 Days
         </div>
         </div>
 
-        <div className='w-full flex flex-col items-center justify-center bg-gray-300 rounded-xl'>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart
-            data={salesChartData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" label={{ value: 'Dates', angle: 0,  position: 'insideBottom', offset: -5 }} />
-            <YAxis label={{ value: 'Sales Value (USD)', angle: -90, position: 'insideLeft' }} />
-            <Tooltip />
-            <Line type='monotone' dataKey="value" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          </LineChart>
-        </ResponsiveContainer>
-        <div className='text-xl my-6 font-bold text-gray-800'>
+        <div className='w-full flex flex-col items-center justify-center bg-stone-800 rounded-xl'>
+        <ResponsiveContainer width="100%" height={300} className="bg-stone-800">
+  <LineChart
+    data={salesChartData}
+    margin={{
+      top: 5,
+      right: 30,
+      left: 20,
+      bottom: 5,
+    }}
+    style={{ backgroundColor: '#292524' }} // stone-800 equivalent
+  >
+    <CartesianGrid strokeDasharray="3 3" stroke="#4B5563" /> {/* Stone-500 for grid */}
+    <XAxis 
+      dataKey="date"
+      label={{
+        value: 'Dates',
+        angle: 0,
+        position: 'insideBottom',
+        offset: -5,
+        fill: '#FFFFFF', // White text
+      }}
+      tick={{ fill: '#FFFFFF' }} // White ticks
+    />
+    <YAxis 
+      label={{
+        value: 'Sales Value (USD)',
+        angle: -90,
+        position: 'insideLeft',
+        fill: '#FFFFFF', // White text
+      }}
+      tick={{ fill: '#FFFFFF' }} // White ticks
+    />
+    <Tooltip 
+      contentStyle={{
+        backgroundColor: '#1F2937', // Slate-800 equivalent
+        color: '#FFFFFF', // White text
+      }}
+      itemStyle={{ color: '#FFFFFF' }} // White text
+    />
+    <Line 
+      type="monotone" 
+      dataKey="value" 
+      stroke="#8884d8" 
+      activeDot={{ r: 8, fill: "pink", stroke: "blue" }} 
+    />
+  </LineChart>
+</ResponsiveContainer>
+        <div className='text-xl my-6 font-bold text-gray-100'>
           Sales Progress
         </div>
         </div>
