@@ -58,7 +58,7 @@ const Header = () => {
               setIsMenuOpen(false);
               navigate("/");
             }}
-            className="text-white text-lg md:text-xl hover:underline"
+            className={`text-white text-lg md:text-xl hover:underline ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}
           >
             Home
           </button>

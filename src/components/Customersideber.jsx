@@ -41,10 +41,10 @@ const Customersideber = ({toggleSidebar}) => {
   };
 
   return (
-    <div className="w-full bg-stone-900 flex flex-col justify-start items-center">
+    <div className="w-full bg-green-600 rounded-lg flex flex-col justify-start items-center">
       
       <div className="mb-8">
-        <h1 className="text-2xl text-center my-4 mb-8 font-bold">Customer Dashboard</h1>
+        <h1 className="text-2xl text-center my-4 mb-8 text-gray-800 font-bold">Customer Dashboard</h1>
         <div className="flex items-center mt-4">
           <img
             src={
@@ -56,17 +56,17 @@ const Customersideber = ({toggleSidebar}) => {
             className="rounded-full w-20 h-20"
           />
           <div className="ml-3">
-            <h2 className="text-lg font-semibold">{user.name}</h2>
+            <h2 className="text-lg text-gray-800 font-semibold">{user.name}</h2>
             <button
               onClick={() => setShowDetails((prev) => !prev)}
-              className="mt-2 text-blue-500 text-sm underline focus:outline-none"
+              className="mt-2 text-gray-800 text-sm underline focus:outline-none"
             >
               {showDetails ? "Hide Details" : "See Details"}
             </button>
           </div>
         </div>
         {showDetails && userData.length > 0 && (
-          <div className="mt-4 p-4 bg-gray-800 rounded-lg shadow-lg">
+          <div className="mt-4 p-4 bg-green-600 rounded-lg shadow-lg border text-gray-800">
             <p className="text-sm">
               <strong>Email:</strong> {userData[0].email}
             </p>
@@ -182,7 +182,7 @@ const Customersideber = ({toggleSidebar}) => {
       </li>
       <li>
         <button
-          className="flex items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="items-center p-4 w-full text-lg font-semibold text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hidden"
         onClick={()=>{
           toggleSidebar();
         }}

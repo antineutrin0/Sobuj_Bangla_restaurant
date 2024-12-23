@@ -40,7 +40,7 @@ const AdminSidebar = ({ toggleSidebar }) => {
 
   return (
     <div className="bg-gray-900 text-white w-4/5 md:w-full p-5 flex flex-col rounded-lg">
-      <div className="mb-8">
+      <div className="mb-8 ">
         <h1 className="text-2xl text-center my-4 mb-8 font-bold">Admin Dashboard</h1>
         <div className="flex items-center mt-4">
           <img
