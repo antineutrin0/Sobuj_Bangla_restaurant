@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import authService, { useAuth } from '../appwrite/AuthConfig';
 
 function Signup() {
-
-    const {createAccount}=useAuth();
+  const { createAccount } = useAuth();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -12,21 +11,21 @@ function Signup() {
     password: '',
     userType: 'Customer', // Default user type
   });
-  const [secretkey,setsecretkey]=useState("");
+  const [secretkey, setsecretkey] = useState('');
 
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     password: '',
     userType: '',
-    secretkey:''
+    secretkey: '',
   });
 
   const navigate = useNavigate();
 
   const validateInputs = () => {
-    const { name, email, password } = formData;
-    const newErrors = { name: '', email: '', password: '', userType: '' };
+    const { name, email, password, userType } = formData;
+    const newErrors = { name: '', email: '', password: '', userType: '', secretkey: '' };
     let isValid = true;
 
     if (!name) {
@@ -41,10 +40,9 @@ function Signup() {
       newErrors.password = 'Password must be at least 6 characters long.';
       isValid = false;
     }
-    if(formData.userType=="Admin"&&secretkey!="sobujbangla")
-    {
-      newErrors.secretkey='Secret Key is wrong';
-      isValid=false;
+    if (userType === 'Admin' && secretkey !== 'sobujbangla') {
+      newErrors.secretkey = 'Secret Key is wrong.';
+      isValid = false;
     }
 
     setErrors(newErrors);
@@ -58,10 +56,11 @@ function Signup() {
       [name]: value,
     });
   };
-  const handlesecretkey=(e)=>{
-    const value=e.target.value;
+
+  const handlesecretkey = (e) => {
+    const value = e.target.value;
     setsecretkey(value);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,11 +69,9 @@ function Signup() {
     try {
       const result = await createAccount(formData);
       console.log(result);
-      if(formData.userType=='Customer')
-      navigate('/dashboard/customer/orderfood');
-       if(formData.userType=='Admin')
-        navigate('/dashboard/admin') 
-      window.location.reload(); 
+      if (formData.userType === 'Customer') navigate('/dashboard/customer/orderfood');
+      if (formData.userType === 'Admin') navigate('/dashboard/admin');
+      window.location.reload();
     } catch (error) {
       console.error(error);
       setErrors({ ...errors, password: error.message });
@@ -92,9 +89,8 @@ function Signup() {
             BANGLA
           </span>
         </div>
-        
+
         <div className="my-4">
-          {/* <p className="text-white text-xl font-semibold mb-2">User Type:</p> */}
           <div className="flex space-x-4">
             <label className="flex items-center text-xl font-semibold text-gray-100">
               <input
@@ -138,11 +134,8 @@ function Signup() {
                 errors.name ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your name"
-              required
             />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-            )}
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
           </div>
 
           <div>
@@ -162,11 +155,8 @@ function Signup() {
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your email"
-              required
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
 
           <div>
@@ -186,38 +176,36 @@ function Signup() {
                 errors.password ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your password"
-              required
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
             )}
           </div>
-          <div className={`${formData.userType=="Admin"?'block':'hidden'}`}>
-            <label htmlFor="Secret Key"
-            className='block text-sm font-medium text-white'
-            >Secret Key</label>
-            <input type="text"
-            id="key"
-            name="Secret Key"
-            value={secretkey}
-            onChange={handlesecretkey}
-            className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-              errors.secretkey ? 'border-red-500' : 'border-gray-300'
-            }`}
-            placeholder="Enter Secret Key"
-            required
-          />
-          {errors.secretkey && (
-            <p className="text-red-500 text-sm mt-1">{errors.secretkey}</p>
-          )}
-          </div>
 
-          <div className="flex items-center justify-between">
-            <label className="flex items-center space-x-2 text-gray-600">
-              <input type="checkbox" className="rounded border-gray-100" />
-              <span className="text-gray-400">Remember me</span>
-            </label>
-          </div>
+          {formData.userType === 'Admin' && (
+            <div>
+              <label
+                htmlFor="secretKey"
+                className="block text-sm font-medium text-white"
+              >
+                Secret Key
+              </label>
+              <input
+                type="text"
+                id="secretKey"
+                name="secretKey"
+                value={secretkey}
+                onChange={handlesecretkey}
+                className={`mt-1 block w-full rounded-lg border px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  errors.secretkey ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="Enter Secret Key"
+              />
+              {errors.secretkey && (
+                <p className="text-red-500 text-sm mt-1">{errors.secretkey}</p>
+              )}
+            </div>
+          )}
 
           <button
             type="submit"
@@ -229,10 +217,7 @@ function Signup() {
 
         <div className="mt-6 text-center text-sm text-gray-400">
           Already have an account?{' '}
-          <a
-            href="/signin"
-            className="text-blue-500 hover:underline font-medium"
-          >
+          <a href="/signin" className="text-blue-500 hover:underline font-medium">
             Sign In
           </a>
         </div>
