@@ -66,7 +66,7 @@ const Review = () => {
 
   return (
     <div className="min-h-screen max-w-7xl mx-auto bg-stone-950 flex flex-col md:flex-row-reverse justify-between items-center p-6">
-      {/* Left Section */}
+     
       <div className="flex flex-col justify-start items-center h-full text-center text-white p-6 bg-stone-950 w-full md:w-1/3">
         <p className="text-xl md:text-2xl text-start font-bold border border-amber-600 p-2 bg-amber-600 text-black rounded-lg">
           Our Clients Say
@@ -111,7 +111,7 @@ const Review = () => {
                 <div>
                   <h5 className="text-lg font-bold text-white">{review.name}</h5>
                   <p className="text-sm text-gray-400">{review.gmail}</p>
-                  <div className="text-lg text-white"><span className="text-lg font-bold bg-gray-700 rounded-lg text-gray-50">Category: </span>{review.category}</div>
+                  <div className="text-lg text-white"><span className="text-lg font-bold bg-gray-700 rounded-lg text-gray-50">Category: </span>{ review.category}</div>
                   <StarRating rating={review.rating} />
 
                 </div>

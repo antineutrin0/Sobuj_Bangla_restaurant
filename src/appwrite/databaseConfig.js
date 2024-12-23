@@ -16,9 +16,19 @@ export class Service {
     
 
     async  makereview({ name, gmail, profile,category,rating,review }) {
+
         try {
-            console.log(name, gmail, profile,category,rating,review);
-            return await this.databases.createDocument(
+            
+            const response=await this.databases.listDocuments(
+                conf.sobujbanglaDatabaseId,
+                conf.sobujbanglaUserCollectionId,
+                [Query.equal('email',gmail)]
+              )
+
+             if(response.documents.length>0)
+              profile=response.documents[0].photo_URL
+
+             return await this.databases.createDocument(
                 conf.sobujbanglaDatabaseId,
                 conf.sobujbanglaReviewCollectionId,
                 ID.unique(), {
