@@ -44,13 +44,13 @@ const MyCard = () => {
   return (
     <div className="bg-stone-900 p-6 h-full">
       <div className="text-2xl md:text-3xl border w-1/2 mx-auto p-2 border-amber-700 text-amber-700 rounded-lg font-bold text-center mb-6">
-        MY CARD
+        MY CART
       </div>
 
      
       {foodItem.length === 0 ? (
         <div className="flex justify-center items-center h-64">
-          <h2 className="text-3xl text-gray-400 font-bold"> Card is Empty</h2>
+          <h2 className="text-3xl text-gray-400 font-bold"> Cart is Empty</h2>
         </div>
       ) : (
         
