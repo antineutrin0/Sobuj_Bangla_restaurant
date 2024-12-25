@@ -31,6 +31,7 @@ function AdminTableHistory() {
         );
   
         setBookings(next7DaysData); 
+        console.log("booking",bookings);
       } catch (error) {
         console.error("Error fetching table bookings:", error);
       }

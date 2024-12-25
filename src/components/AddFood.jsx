@@ -49,7 +49,9 @@ function AddFood() {
         try {
             console.log("update",formData);
             await service.updateFoodData(formData,itemId)
+           
             navigate('/dashboard/admin/foodmenu')
+            window.location.reload();
             return;
         } catch (error) {
             console.log(error);
@@ -65,9 +67,11 @@ function AddFood() {
         console.log('Image uploaded successfully:', imageUrl);
       }
       console.log('Submitting food data:', formData);
-      await service.addFoodData(formData);
+      await service.addFoodData({...formData,image:imageUrl});
       console.log('Food added successfully');
+      
       navigate('/dashboard/admin/foodmenu');
+      window.location.reload();
     } catch (error) {
       console.error('Error adding food:', error);
       alert('Failed to add food. Please try again.');
@@ -77,7 +81,11 @@ function AddFood() {
   return (
     <div className="flex items-center justify-center w-full h-full bg-stone-900">
       <div className="w-full max-w-lg text-gray-100 p-8 bg-stone-800 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">Add New Item</h2>
+        {
+         itemId? <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">Update the Item</h2>
+         :<h2 className="text-2xl font-bold text-gray-100 text-center mb-6">Add New Item</h2>
+        
+     }
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-100 mb-2">Food ID</label>

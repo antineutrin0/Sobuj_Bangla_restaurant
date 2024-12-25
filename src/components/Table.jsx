@@ -46,8 +46,11 @@ function Table({ formData,showTable }) {
         bookedtable.forEach((table) => {
           const tableNo = table.tableNo;
           if (
-            formData.endTime >= table.startTime &&
-            formData.endTime <= table.endTime
+            (formData.startTime >= table.startTime &&
+              formData.startTime <= table.endTime)||
+            (formData.endTime >= table.startTime &&
+            formData.endTime <= table.endTime)
+
           ) {
             const chairNo = table.chairNo;
             tables[tableNo - 1].chairs.forEach((chair) => {
@@ -87,8 +90,8 @@ function Table({ formData,showTable }) {
           customerName:user.name,
           email:user.email
         };
-        console.log("admin2",chairs)
-        if(!data.chairs)
+        console.log("admin2",data.chairs.length)
+        if(data.chairs.length>2)
         await service.adminTableBook(data);
       }
     } catch (error) {
@@ -97,8 +100,8 @@ function Table({ formData,showTable }) {
   }
 
   const handleBookAll = async () => {
-    bookForAdmin();
-    try {
+      bookForAdmin();
+     try {
       for (const table of tables) {
         const tableNo = table.tableNumber;
         for (const chair of table.chairs) {

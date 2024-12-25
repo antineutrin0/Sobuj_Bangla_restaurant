@@ -18,7 +18,7 @@ function FoodReviewForm() {
   });
 
   const [showSuccess, setShowSuccess] = useState(false);
-  const [error, setError] = useState(null); // For handling submission errors
+  const [error, setError] = useState(null); 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
