@@ -10,7 +10,7 @@ const Menu = () => {
   const {user,foodData}=useAuth();
   const [isAdmin,setisAdmin]=useState(false);
   useEffect(()=>{
-    if(user.prefs.role=="Admin")
+    if(user&&user.prefs.role=="Admin")
       setisAdmin(true);
   },[])
 
