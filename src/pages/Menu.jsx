@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../appwrite/AuthConfig";
 import service from "../appwrite/databaseConfig";
 import conf from "../conf/conf";
-import { div } from "framer-motion/client";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -17,7 +16,7 @@ const Menu = () => {
   console.log("fooddata",foodData)
   const handleOrder = (id) => {
     if(user)
-    navigate(`${id}`); 
+    navigate(`${id}`);
   else
   navigate('/signin'); 
   };

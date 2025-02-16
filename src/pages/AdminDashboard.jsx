@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { FaUsers, FaDollarSign, FaFileInvoice } from 'react-icons/fa';
-import AdminSidebar from '../components/AdminSidebar'; // Ensure this component exists
-import SalesChart from '../components/SalesChart'; // Ensure this component exists
+import AdminSidebar from '../components/AdminSidebar'; 
 import { TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarLeftExpandFilled } from 'react-icons/tb';
-import AdminOrderHistory from '../components/AdminOrderHistory';
-import AdminTableHistory from '../components/AdminTableHistory';
 import { Outlet } from 'react-router-dom';
 
 const AdminDashboard = () => {

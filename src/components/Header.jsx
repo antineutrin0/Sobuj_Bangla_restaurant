@@ -168,12 +168,11 @@ const Header = () => {
     <ImSearch />
   </button>
   </div>
-        <p className="text-2xl md:text-4xl text-right font-bold mr-4 mb-4 ">Enjoy Our Meal</p>
-        <h2 className="text-xl pb-8 md:pb-2 md:text-3xl italic font-bold text-start ml-4 text-gray-900 mt-2"><span className="border p-1 rounded-xl bg-gray-100">On Black Plate</span></h2>
+        <p className="text-2xl md:text-4xl text-center font-bold mb-4 ">Enjoy Our Meal</p>
+        <h2 className="text-xl pb-8 md:pb-2 md:text-3xl italic font-bold text-center  text-gray-900 mt-2"><span className="border p-1 rounded-xl bg-gray-100">On Black Plate</span></h2>
         <p className="hidden lg:block text-lg font-thin mt-2 rounded-lg p-2">This Restaurant offers an authentic taste of Bengal,<br /> blending traditional flavors with modern charm. <br /> With every dish crafted to perfection, <br /> it’s a place where great food meets heartfelt hospitality.</p>
-        </div>
-      <div className="mt-4 lg:-mt-12 lg:mb-24 z-10 flex mx-auto md:mx-0 ">
-         <button className={ `text-center ml-28  md:ml-80 text-xl md:text-3xl text-black font-bold bg-amber-600 p-4 md:p-5 rounded-2xl hover:bg-amber-700 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"} `}
+        <div className="mt-4  z-10 flex mx-auto">
+         <button className={ `text-center text-xl md:text-3xl mx-auto text-black font-bold bg-amber-600 p-4 md:p-5 rounded-2xl hover:bg-amber-700 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"} `}
          onClick={()=>{
           if(user)
             navigate('/dashboard/customer/booktable')
@@ -185,6 +184,8 @@ const Header = () => {
           BOOK A TABLE
          </button>
         </div>
+        </div>
+     
       </div>
     </div>
   );
