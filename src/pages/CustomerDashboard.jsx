@@ -24,7 +24,7 @@ function CustomerDashboard() {
           <TbLayoutSidebarLeftCollapseFilled size={24} />
         )}
       </button>
-
+ 
       <div className="flex">
         {/* Sidebar (always visible on large devices) */}
         <div

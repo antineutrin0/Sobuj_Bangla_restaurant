@@ -22,7 +22,7 @@ function Signup() {
   });
 
   const navigate = useNavigate();
-
+  
   const validateInputs = () => {
     const { name, email, password, userType } = formData;
     const newErrors = { name: '', email: '', password: '', userType: '', secretkey: '' };

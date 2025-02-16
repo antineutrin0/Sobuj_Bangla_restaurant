@@ -59,7 +59,7 @@ function AdminOutlet() {
       </div>
       <div className="bg-stone-900 w-full shadow-md p-4 rounded-lg flex justify-between items-center">
         <div className='ml-4 md:ml-0'>
-          <h4 className="text-gray-100 text-lg font-semibold">Income</h4>
+          <h4 className="text-gray-100 text-lg font-semibold">Total Sales</h4>
           <p className="text-xl font-bold">${income}</p>
         </div>
         <FaDollarSign className="text-green-500 text-3xl mr-4 md:mr-0" />

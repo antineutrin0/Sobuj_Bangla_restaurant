@@ -120,7 +120,7 @@ const Header = () => {
             {user.prefs && user.prefs.role === "Customer" ? (
             <button
                 onClick={() => {
-                navigate(  'dashboard/customer/orderfood');
+                navigate( 'dashboard/customer/orderfood');
                 }}
             >
               <span>OrderNow</span>
@@ -143,9 +143,9 @@ const Header = () => {
         </div>
       </nav>
 
-      <div className="flex flex-col justify-center items-center md:items-start  h-full text-center text-white p-8">
-        <div className=" backdrop-blur-lg p-2 lg:p-16 rounded-lg">
-        <div className={`flex items-center bg-green-600 border-white border-2  mt-4 mb-8 rounded-full mx-auto flex-1 w-full lg:w-4/5 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}>
+      <div className="flex flex-col justify-center items-center h-full md:h-fit md:mt-0 md:items-start  text-center text-white md:ml-16">
+        <div className=" backdrop-blur-lg p-8  md:p-12 rounded-lg">
+        <div className={`flex items-center bg-green-600 border-white border-2 mb-8 rounded-full mx-auto flex-1 w-full lg:w-4/5 ${(user&&user.prefs.role)=="Admin"?"hidden":"Block"}`}>
         <select
     className="bg-transparent text-xl text-gray-900 font-semibold px-2 outline-none w-full"
     value={searchQuery}

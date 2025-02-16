@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../appwrite/AuthConfig";
 
 const MyCard = () => {
-  const { user,foodData } = useAuth();
+  const { user, foodData } = useAuth();
   const [cardData, setCardData] = useState([]);
   const [foodItem, setFoodItem] = useState([]);
   const [triger, setTriger] = useState(false);
+  const [loading, setLoading] = useState(true); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const getCardData = async () => {
+      setLoading(true); 
       try {
         const data = await service.getMyCardData(user.email);
         console.log(data);
@@ -19,6 +21,7 @@ const MyCard = () => {
       } catch (error) {
         console.log(error);
       }
+      setLoading(false); 
     };
     getCardData();
   }, [triger]);
@@ -47,13 +50,16 @@ const MyCard = () => {
         MY CART
       </div>
 
-     
-      {foodItem.length === 0 ? (
+      
+      {loading ? (
         <div className="flex justify-center items-center h-64">
-          <h2 className="text-3xl text-gray-400 font-bold"> Cart is Empty</h2>
+          <h2 className="text-3xl text-gray-400 font-bold">Loading...</h2>
+        </div>
+      ) : foodItem.length === 0 ? (
+        <div className="flex justify-center items-center h-64">
+          <h2 className="text-3xl text-gray-400 font-bold">Cart is Empty</h2>
         </div>
       ) : (
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {foodItem.map((card) => (
             <div
@@ -99,7 +105,7 @@ const MyCard = () => {
         </div>
       )}
 
-      {foodItem.length > 0 && (
+      {foodItem.length > 0 && !loading && (
         <div className="flex justify-center my-20">
           <button
             className="text-2xl p-2 md:p-4 font-bold bg-amber-600 hover:bg-amber-700 rounded-lg text-black"
